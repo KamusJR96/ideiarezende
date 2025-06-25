@@ -55,7 +55,13 @@ a {
     filter: brightness(0) invert(1); /* Ajusta a altura do logo e inverte as cores para branco */
 }
 
-.search-bar {
+/* Esconde a barra de pesquisa e as ações do usuário do desktop por padrão no mobile */
+.desktop-search,
+.desktop-actions {
+    display: flex; /* Visível por padrão no desktop */
+}
+
+.search-bar { /* Estilo base para todas as barras de pesquisa */
     display: flex;
     flex-grow: 1;
     margin: 0 20px;
@@ -75,7 +81,7 @@ a {
 }
 
 .search-bar input::placeholder {
-    color: #bbb; /* Cor do placeholder */
+    color: #d3d3d3; /* Cor do placeholder */
 }
 
 .search-bar button {
@@ -86,7 +92,7 @@ a {
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    color: #bbb; /* Cor do ícone de busca */
+    color: #ff8c00; /* Cor do ícone de busca */
     font-size: 16px;
     padding: 0;
 }
@@ -101,13 +107,13 @@ a {
 .user-actions .action-item {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 5px; /* Espaço entre ícone e texto no desktop */
     color: #fff; /* Cor do texto das ações do usuário para branco */
     white-space: nowrap;
 }
 
 .user-actions .action-item i {
-    font-size: 18px;
+    font-size: 24px; /* Aumentado para 24px (tamanho desktop) */
     color: #ff8c00; /* Laranja para ícones de ação do usuário */
 }
 
@@ -115,11 +121,11 @@ a {
 .main-nav {
     background-color: #333; /* Cor de fundo da navegação para cinza escuro */
     border-top: 0px solid #555; /* Borda superior mais escura */
-    padding: 8px 0 1px 0; /* Aumentado padding-top para 8px, mantendo padding-bottom em 1px */
+    padding: 3px 0 3px 0; /* Aumentado padding-top para 8px, mantendo padding-bottom em 1px */
     margin-top: 0; /* Remover margem superior */
     margin-bottom: 0; /* Remover margem inferior */
     position: fixed;
-    top: 62px; /* Posiciona o nav exatamente abaixo do header. Altura do header é ~62px. */
+    top: 60px; /* Posiciona o nav exatamente abaixo do header. Altura do header é ~62px. */
     left: 0;
     width: 100%;
     z-index: 999; /* Um pouco abaixo do header, mas ainda fixo */
@@ -160,23 +166,35 @@ a {
     font-size: 20px;
 }
 
+/* Esconde o texto "Departamentos" por padrão no desktop. Será visível em mobile. */
+.departments-button .departments-text {
+    display: inline; /* Visível por padrão no desktop */
+}
+
+/* Barra de pesquisa que aparece no nav, mas apenas em mobile */
+.mobile-nav-search {
+    display: none; /* Escondida por padrão no desktop */
+}
+
 /* Estilos para o Menu Dropdown de Departamentos */
 .departments-menu {
     position: relative;
-    z-index: 20; /* Garante que o menu flutue sobre outros elementos */
+    z-index: 20;
 }
 
 .departments-dropdown-content {
-    display: none; /* OCULTAR POR PADRÃO (será exibido por hover em desktop ou JS em mobile) */
-    position: absolute; /* Posição padrão para desktop (sobrepor) */
-    background-color: #444; /* Fundo do dropdown mais escuro */
+    display: none;
+    position: absolute;
+    background-color: #444;
     min-width: 200px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 10;
     border-radius: 5px;
-    top: 100%;
+    top: 100%; /* Mantém o topo alinhado com o botão */
     left: 0;
-    margin-top: 5px;
+    margin-top: 0px; /* Reduzir ou zerar esta margem se houver um pequeno espaço visual que quebra o hover */
+    padding-top: 5px; /* Adiciona um pequeno padding no topo do dropdown para "capturar" o mouse mais cedo */
+    padding-bottom: 5px; /* Garante padding na parte inferior */
 }
 
 /* Mostra o dropdown de departamentos em desktop com hover */
@@ -188,11 +206,12 @@ a {
 @media (min-width: 769px) { /* Aplica apenas para telas maiores que 768px */
     .departments-dropdown-content a {
         color: #eee;
-        padding: 12px 16px; /* Aumentado o padding vertical para maior espaçamento */
+        padding: 12px 16px; 
         text-decoration: none;
         display: block;
         white-space: nowrap;
-        font-size: 15px; /* Aumentado o tamanho da fonte */
+        font-size: 15px;
+        padding-right: 25px; /* Aumenta o padding à direita para o submenu */
     }
 }
 
@@ -204,7 +223,7 @@ a {
 
 /* --- ESTILOS PARA SUBMENUS --- */
 .has-submenu {
-    position: relative; /* Para posicionar o submenu em relação ao pai */
+    position: relative;
 }
 
 .has-submenu > a {
@@ -234,10 +253,9 @@ a {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 100;
     left: 100%;
-    top: 0;
-    border-radius: 5px;
-    list-style: none;
+    top: 0; /* Alinha o topo do submenu com o topo do item pai */
     margin: 0;
+    margin-left: -5px; /* Um pequeno ajuste para sobrepor o item pai e evitar o "buraco" */
 }
 
 /* Mostra o submenu quando o mouse passa sobre o item pai (.has-submenu) APENAS em desktop */
@@ -245,18 +263,17 @@ a {
     .has-submenu:hover > .submenu {
         display: block;
     }
-
-    /* NOVO: Estilos para os links dos submenus aninhados (desktop) */
-    .submenu li a {
-        color: #eee;
-        padding: 10px 14px; /* Aumentado o padding vertical e horizontal */
-        text-decoration: none;
-        display: block;
-        white-space: nowrap;
-        font-size: 14px; /* Aumentado o tamanho da fonte */
-    }
 }
 
+/* NOVO: Estilos para os links dos submenus aninhados (desktop) */
+.submenu li a {
+    color: #eee;
+    padding: 10px 14px; /* Aumentado o padding vertical e horizontal */
+    text-decoration: none;
+    display: block;
+    white-space: nowrap;
+    font-size: 14px; /* Aumentado o tamanho da fonte */
+}
 
 .submenu li a:hover {
     background-color: #666;
@@ -467,7 +484,7 @@ a {
 
 .products-container {
     flex-grow: 1;
-    background-color: transparent; /* --- ALTERAÇÃO: Fundo transparente para ver o cinza do body por baixo dos cards --- */
+    background-color: transparent; /* --- ALTERAÇÃO: Fundo transparente para ver o cinza do body por baixo de-mail os cards --- */
     border-radius: 0; /* Removido arredondamento extra aqui */
     box-shadow: none; /* Removida sombra extra aqui */
     padding: 0; /* Removido padding, cada card terá o seu padding/margem */
@@ -710,8 +727,7 @@ a {
     opacity: 1;
 }
 
-
-/* Responsividade básica */
+/* --- AJUSTES RESPONSIVOS PARA TABLET (max-width: 992px) --- */
 @media (max-width: 992px) {
     .main-content-area {
         flex-direction: column;
@@ -731,43 +747,154 @@ a {
     }
 }
 
+/* --- AJUSTES RESPONSIVOS PARA MOBILE (max-width: 768px) --- */
 @media (max-width: 768px) {
     body {
-        padding-top: 0;
+        padding-top: 0; /* Remove padding do body para deixar o header gerenciar seu próprio espaço */
     }
+
     .main-header {
-        position: relative;
-        height: auto;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        position: relative; /* Não precisa ser fixo em mobile */
+        height: auto; /* Altura automática para se ajustar ao conteúdo */
+        padding: 10px 0 0 0; /* Ajusta o padding para cima e zera os outros, vamos controlar o espaço interno */
+        border-bottom: 1px solid #444; /* Linha sutil para separar header e nav */
+        box-shadow: none; /* Remove a sombra padrão para um look mais limpo em mobile */
     }
+    
     .main-nav {
-        position: relative;
+        position: relative; /* Não precisa ser fixo em mobile */
         top: auto;
         height: auto;
-        margin-top: 10px;
-        margin-bottom: -10px;
-        box-shadow: none;
+        margin-top: 0; /* Ajusta a margem superior para ficar rente ao header */
+        margin-bottom: 0;
     }
 
     .wrapper {
-        padding: 0 10px;
+        padding: 0 10px; /* Padding lateral menor em mobile */
     }
 
-    .header-top-bar,
-    .nav-wrapper {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+    /* ALINHAMENTO NO HEADER: LOGO, LOGIN/CARRINHO (NA MESMA LINHA, LOGIN/CARRINHO EMPILHADOS) */
+    .header-top-bar {
+        flex-direction: row; /* Mantém logo e user-actions na mesma linha */
+        justify-content: space-between; /* Espalha a logo para esquerda e ações para direita */
+        align-items: center; /* Alinha verticalmente */
+        width: 100%;
+        padding-bottom: 10px; /* Padding abaixo para separar do nav */
+        border-bottom: 1px solid #444; /* Linha sutil para separar header e nav */
     }
 
-    /* OCULTAR a barra de pesquisa e as ações do usuário */
-    .search-bar,
+    .logo {
+        flex-shrink: 0; /* Impede que a logo encolha */
+        margin-right: 10px; /* Espaço à direita da logo */
+    }
+    
+    .logo img {
+        height: 35px; /* Reduz o tamanho da logo um pouco em mobile */
+        filter: brightness(0) invert(1); /* Mantém branco */
+    }
+
+    /* Esconde a barra de pesquisa que estava no header para desktop */
+    .desktop-search {
+        display: none; 
+    }
+
+    /* As ações do usuário (Login/Carrinho) no header para mobile */
     .user-actions {
-        display: none;
+        display: flex;
+        flex-direction: row; /* ALTERADO: Ícones lado a lado em mobile*/
+        align-items: center; /* Alinha os itens para o centro verticalmente */
+        gap: 15px; /* Aumenta o espaçamento entre os ícones*/
+        font-size: 14px;
+        flex-shrink: 0;
+    }
+    
+    .user-actions .action-item {
+        display: flex;
+        align-items: center;
+        gap: 0; /* Remove gap entre ícone e texto no mobile, já que o texto será oculto */
+        color: #fff;
+        white-space: nowrap;
+        padding: 0; 
+        font-size: 0; /* Zera o tamanho da fonte para ocultar o texto */
+        width: 28px; /* Ajusta a largura para o ícone */
+        height: 28px; /* Ajusta a altura para o ícone */
+        justify-content: center; /* Centraliza o ícone */
+        align-items: center; /* Centraliza o ícone */
+        overflow: hidden; /* Garante que o texto oculto não ocupe espaço */
     }
 
+    /* Garante que apenas o ícone continue visível e com o tamanho correto */
+    .user-actions .action-item i {
+        font-size: 28px; /* Mantém o tamanho do ícone */
+        width: auto; /* Permite que o ícone determine sua largura natural */
+        height: auto; /* Permite que o ícone determine sua altura natural */
+    }
+
+
+    /* ALINHAMENTO NO NAV MENU: DEPARTAMENTOS (APENAS ÍCONE) E PROCURAR (BARRA DE PESQUISA GRANDE) */
+    .nav-wrapper {
+        flex-direction: row; /* Coloca o botão Departamentos e a barra de pesquisa na mesma linha */
+        align-items: center; /* Alinha verticalmente */
+        justify-content: space-between; /* Espalha o botão e a barra */
+        width: 100%; /* Ocupa a largura total */
+        padding: 5px 10px; /* Ajusta padding para o nav wrapper em mobile */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adiciona sombra para separar do conteúdo */
+    }
+
+    .departments-menu {
+        width: auto; /* Deixa a largura automática para o botão */
+        flex-shrink: 0; /* Impede que encolha */
+    }
+    
+    .departments-button {
+        width: 45px; /* Define largura fixa para o botão, focado no ícone */
+        height: 45px; /* Define altura fixa para o botão */
+        padding: 0; /* Remove padding para focar no ícone */
+        justify-content: center; /* Centraliza o ícone dentro do botão */
+        align-items: center; /* Centraliza verticalmente o ícone */
+    }
+
+    /* Esconde o texto "Departamentos" no botão para mobile */
+    .departments-button .departments-text {
+        display: none; 
+    }
+
+    /* Barra de pesquisa específica para o nav em mobile (visível e maior) */
+    .mobile-nav-search {
+        display: flex; /* Torna a barra de pesquisa visível no nav em mobile */
+        flex-grow: 1; /* Permite que ocupe o espaço restante */
+        margin-left: 10px; /* Espaçamento entre o botão de departamentos e a barra */
+        max-width: none; /* Garante que ocupe a largura total disponível */
+        position: relative;
+    }
+
+    .mobile-nav-search input {
+        width: 100%;
+        padding: 12px 40px 12px 15px; /* Aumentado o padding vertical para campo maior */
+        border: 1px solid #555;
+        border-radius: 20px;
+        font-size: 14px;
+        outline: none;
+        background-color: #333;
+        color: #eee;
+    }
+
+    .mobile-nav-search button {
+        background: none;
+        border: none;
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #ff8c00;
+        font-size: 16px;
+        padding: 0;
+    }
+
+    /* Esconde a lista de benefícios em mobile */
     .benefits-list {
-        display: none; /* OCULTAR a lista de benefícios em mobile */
+        display: none;
     }
 
     .hero-banner {
@@ -780,36 +907,35 @@ a {
     }
 
     .product-categories {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
     }
 
-    /* Ajustes para o dropdown de Departamentos em mobile */
+    /* Ajustes para o dropdown de Departamentos em mobile (slide-in) */
     .departments-dropdown-content {
-        position: fixed; /* Fixa o menu para ocupar a tela */
+        position: fixed;
         top: 0;
-        left: -100%; /* Inicia fora da tela, à esquerda */
-        width: 80%; /* Ocupa 80% da largura da tela */
-        max-width: 300px; /* Limite de largura para o menu */
-        height: 100%; /* Ocupa a altura total */
-        background-color: #444; /* Fundo do dropdown mais escuro */
-        box-shadow: 4px 0 10px rgba(0, 0, 0, 0.3); /* Sombra para indicar profundidade */
-        transition: left 0.3s ease-out; /* Animação para deslizar */
-        overflow-y: auto; /* Adiciona scroll se o conteúdo for grande */
-        border-radius: 0; /* Remove border-radius */
-        padding-top: 70px; /* Espaço MAIOR para o botão de fechar no topo */
-        padding-bottom: 20px; /* Padding inferior para rolagem */
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100%;
+        background-color: #444;
+        box-shadow: 4px 0 10px rgba(0, 0, 0, 0.3);
+        transition: left 0.3s ease-out;
+        overflow-y: auto;
+        border-radius: 0;
+        padding-top: 70px;
+        padding-bottom: 20px;
         display: block; /* Mantido como block para permitir a transição de 'left' */
-        z-index: 1020; /* Z-index para estar acima do conteúdo normal e atrás do overlay, se necessário */
+        z-index: 1020;
     }
 
-    /* Classe para exibir o dropdown de departamentos em mobile (via JS) */
     .departments-dropdown-content.active-mobile-dropdown {
-        left: 0; /* Desliza para a posição visível */
+        left: 0;
     }
-
-    /* MOSTRAR E ESTILIZAR O BOTÃO DE FECHAR APENAS EM MOBILE DENTRO DO DROPDOWN DE DEPARTAMENTOS */
+    
     .close-departments-button {
-        display: flex; /* AGORA VISÍVEL EM MOBILE COM ESTILO CORRETO */
+        display: flex;
         position: absolute;
         top: 10px;
         right: 10px;
@@ -821,7 +947,7 @@ a {
         font-weight: 600;
         padding: 8px 12px;
         cursor: pointer;
-        z-index: 1001; /* Garante que fique acima de tudo no dropdown */
+        z-index: 1001;
         align-items: center;
         gap: 5px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -835,14 +961,11 @@ a {
         background-color: #e67e00;
     }
 
-
-    /* Ajusta o padding dos itens de primeiro nível para o close button (se você tiver título) */
     .departments-dropdown-content > div.has-submenu > a {
         padding-top: 15px;
         padding-bottom: 15px;
     }
 
-    /* Submenu em mobile: eles devem aparecer empilhados abaixo do item pai */
     .has-submenu {
         width: 100%;
         text-align: left;
@@ -850,128 +973,168 @@ a {
 
     .has-submenu > a {
         justify-content: flex-start;
-        /* Padding esquerdo dos itens de primeiro nível */
         padding-left: 20px; 
     }
 
     .submenu {
-        position: static; /* Torna o submenu parte do fluxo normal */
+        position: static;
         width: 100%;
         box-shadow: none;
         background-color: #555;
-        /* CORREÇÃO: Remover padding-left excessivo para submenus aninhados */
-        padding-left: 0; /* Garante que não haja deslocamento horizontal extra para o submenu em si */
-        max-height: 0; /* Oculto por padrão, para transição */
-        overflow: hidden; /* Garante que o conteúdo oculto não apareça */
-        transition: max-height 0.3s ease-out, padding 0.3s ease-out; /* Transição suave */
+        padding-left: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
     }
 
-    /* CORREÇÃO: Remover padding-left excessivo para os LINKS dentro dos submenus */
     .submenu li a {
-        /* O padding-left anterior era 30px, que era o que causava o deslocamento. */
-        /* Podemos manter um padding menor para indentação visual, ou zerar se não quiser indentação. */
-        padding-left: 10px; /* Reduzido para um leve recuo, ou 0px para nenhum recuo */
-        font-size: 1em; /* Mantém o tamanho da fonte ou ajuste se necessário */
+        padding-left: 10px;
+        font-size: 1em;
     }
 
-    /* Estilo para o submenu aberto em mobile (via JS) */
     .submenu.open {
-        max-height: 500px; /* Altura máxima para mostrar o conteúdo (ajuste se necessário) */
-        overflow: visible; /* Permite que o conteúdo seja visível */
+        max-height: 500px;
+        overflow: visible;
         padding-top: 5px;
         padding-bottom: 5px;
     }
 
-
-    /* Esconder o conteúdo dos filtros em mobile por padrão */
+    /* Estilos para a Sidebar de Filtros em Mobile (Off-canvas) */
     .filter-group h3 {
-        margin-bottom: 0; /* Ajusta margem do título quando minimizado */
-        padding-top: 10px; /* Adiciona um pouco de padding */
-        padding-bottom: 10px; /* Adiciona um pouco de padding */
+        margin-bottom: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
 
     .filter-content {
-        display: none; /* Esconde o conteúdo por padrão em mobile */
-        max-height: 0; /* Para transição de altura */
-        overflow: hidden; /* Garante que o conteúdo oculto não apareça */
-        transition: max-height 0.3s ease-out, padding 0.3s ease-out; /* Transição suave */
+        display: none;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
     }
 
     .filter-content.show {
-        max-height: 500px; /* Altura máxima para mostrar o conteúdo (ajuste se necessário) */
-        overflow: visible; /* Permite que o conteúdo seja visível */
-        padding-top: 10px; /* Adiciona padding quando expandido */
-        padding-bottom: 5px; /* Adiciona padding quando expandido */
+        max-height: 500px;
+        overflow: visible;
+        padding-top: 10px;
+        padding-bottom: 5px;
     }
 
-    /* Mostrar o botão de abrir filtros apenas em mobile */
     .open-filters-button {
-        display: flex; /* Flexbox para centralizar ícone e texto */
+        display: flex;
+        width: 100%;
+        max-width: none;
+        margin: 15px auto 15px auto;
     }
 
-    /* Esconder a sidebar e prepará-la para off-canvas em mobile */
     .sidebar-filters {
-        position: fixed; /* Fixa o menu */
+        position: fixed;
         top: 0;
-        right: -100%; /* Começa fora da tela, à direita */
-        width: 80%; /* Ocupa 80% da largura da tela */
-        max-width: 320px; /* Limite de largura para o menu */
+        right: -100%;
+        width: 80%;
+        max-width: 320px;
         height: 100%;
-        /* Ajuste do padding inferior para acomodar o botão fixo */
         padding: 20px 20px 80px 20px;
-        box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3); /* Sombra para indicar profundidade */
-        z-index: 1050; /* Acima de tudo, incluindo o overlay */
-        transition: right 0.3s ease-out; /* Animação para deslizar */
-        overflow-y: hidden; /* Oculta a barra de rolagem principal, a rolagem será do .sidebar-filters-content-scroll */
-        border-radius: 0; /* Remove border-radius */
-        display: flex; /* Transforma em flex container */
-        flex-direction: column; /* Organiza os itens em coluna */
-        justify-content: flex-start; /* Alinha o conteúdo ao topo */
+        box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3);
+        z-index: 1050;
+        transition: right 0.3s ease-out;
+        overflow-y: hidden;
+        border-radius: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
     }
 
     .sidebar-filters.active {
-        right: 0; /* Desliza para a posição visível */
+        right: 0;
     }
 
-    /* Mostrar o botão de fechar filtros apenas em mobile dentro da sidebar */
     .close-filters-button {
         display: block;
     }
 
-    /* Ajuste para o título principal "Filtros" na sidebar quando off-canvas */
     .sidebar-filters h2 {
-        margin-top: 30px; /* Espaço para o botão de fechar */
-        text-align: center; /* Centraliza o título */
-        border-bottom: none; /* Remove borda inferior */
-        padding-bottom: 0; /* Remove padding */
-        flex-shrink: 0; /* Impede que encolha */
+        margin-top: 30px;
+        text-align: center;
+        border-bottom: none;
+        padding-bottom: 0;
+        flex-shrink: 0;
     }
 
-    /* Estilo para o botão "Aplicar Filtros" fixo em mobile */
     .sidebar-filters .apply-filters {
-        position: absolute; /* Torna o botão fixo dentro da sidebar */
-        bottom: 0; /* Alinha na parte inferior */
+        position: absolute;
+        bottom: 0;
         left: 0;
-        width: 100%; /* Ocupa a largura total da sidebar */
-        border-radius: 0; /* Remove o border-radius para preencher as bordas */
-        padding: 15px 20px; /* Ajusta o padding para ser mais confortável */
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Sombra superior para destacar */
-        z-index: 1060; /* Garante que fique acima do conteúdo da sidebar */
-        flex-shrink: 0; /* Impede que encolha */
+        width: 100%;
+        border-radius: 0;
+        padding: 15px 20px;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1060;
+        flex-shrink: 0;
     }
 
-    /* Adiciona um wrapper para o conteúdo rolável da sidebar, excluindo o título e o botão */
     .sidebar-filters-content-scroll {
-        flex-grow: 1; /* Ocupa o espaço restante */
-        overflow-y: auto; /* Permite rolagem apenas para este conteúdo */
-        -webkit-overflow-scrolling: touch; /* Rolagem suave em iOS */
-        padding-bottom: 20px; /* Espaçamento interno antes do botão fixo */
+        flex-grow: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 20px;
     }
     
     .main-content-area {
         flex-direction: column;
-        align-items: flex-start; /* Alinha o botão de filtros à esquerda */
-        gap: 0; /* Remove gap para não afetar o botão */
-        margin-top: 15px; /* Ajusta margem superior */
+        align-items: flex-start;
+        gap: 0;
+        margin-top: 15px;
+    }
+
+    /* --- NOVOS ESTILOS PARA AJUSTAR BOTÕES DE PRODUTO EM MOBILE --- */
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr); /* Mantém 2 colunas em mobile para produtos */
+        gap: 10px; /* Reduzimos o espaçamento entre os cards para caberem melhor */
+    }
+
+    .product-card {
+        position: relative; /* Adiciona position: relative */
+        padding-bottom: 0; 
+    }
+
+    .product-card img {
+        width: 100%;
+        height: 150px; /* Define uma altura fixa para a imagem */
+        object-fit: cover; /* Garante que a imagem preencha a área sem se deformar */
+        display: block;
+        border-bottom: 1px solid #eee;
+    }
+
+    .product-card h3 {
+        font-size: 0.9em; /* Reduzimos um pouco mais o tamanho do título do produto */
+        margin: 5px 0 0 0; /* Ajustamos margens para menos espaço vertical */
+    }
+
+    .product-card p {
+        font-size: 0.75em; /* Reduzimos ainda mais o tamanho da fonte da descrição */
+        margin: 0 5px 5px 5px; /* Margens menores para o parágrafo */
+        -webkit-line-clamp: 2; /* Mantemos 2 linhas para a descrição */
+        min-height: auto; 
+        max-height: none; 
+        line-height: 1.1em; /* Ajustamos a altura da linha */
+    }
+    
+    .product-card .price {
+        font-size: 0.9em; /* Reduzimos o tamanho da fonte do preço */
+        margin-bottom: 5px; /* Ajustamos a margem inferior */
+        margin-top: auto;
+    }
+
+    .product-buttons {
+        flex-direction: column; 
+        gap: 4px; /* Reduzimos um pouco mais o espaçamento entre os botões */
+        padding: 5px; /* Reduzimos o padding interno */
+    }
+
+    .product-buttons button {
+        width: 100%; 
+        padding: 6px; /* Ajustamos o padding dos botões */
+        font-size: 0.7em; /* Diminui significativamente o tamanho da fonte dos botões */
     }
 }

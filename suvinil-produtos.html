@@ -18,11 +18,11 @@
                         <img src="logo-rezende.jpg" alt="Logo Rezende Materiais para Construção">
                     </a>
                 </div>
-                <div class="search-bar">
+                <div class="search-bar desktop-search">
                     <input type="text" placeholder="O que procura?">
                     <button><i class="fa-solid fa-search"></i></button>
                 </div>
-                <div class="user-actions">
+                <div class="user-actions desktop-actions">
                     <a href="#" class="action-item"><i class="fa-solid fa-user"></i> Entrar / Cadastrar</a>
                     <a href="#" class="action-item"><i class="fa-solid fa-shopping-cart"></i> Carrinho</a>
                 </div>
@@ -31,7 +31,7 @@
         <nav class="main-nav">
             <div class="wrapper nav-wrapper">
                 <div class="departments-menu">
-                    <button class="departments-button"><i class="fa-solid fa-bars"></i> Departamentos</button>
+                    <button class="departments-button"><i class="fa-solid fa-bars"></i> <span class="departments-text">Departamentos</span></button>
                     <div class="departments-dropdown-content" id="departmentsDropdown">
                         <button class="close-departments-button" id="closeDepartmentsBtn"><i class="fa-solid fa-times"></i> Fechar</button>
                         <div class="has-submenu">
@@ -121,6 +121,12 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="search-bar mobile-nav-search">
+                    <input type="text" placeholder="O que procura?">
+                    <button><i class="fa-solid fa-search"></i></button>
+                </div>
+
                 <ul class="benefits-list">
                     <li><i class="fa-solid fa-percent"></i><span>Descontos</span></li>
                     <li><i class="fa-solid fa-bolt"></i><span>Elétrica</span></li>
@@ -394,7 +400,7 @@
         if (filtersOverlay) {
             filtersOverlay.addEventListener('click', function() {
                 if (sidebarFilters) sidebarFilters.classList.remove('active');
-                if (filtersOverlay) filtersFilters.classList.remove('active'); // Corrigido: filtersFilters -> filtersOverlay
+                if (filtersOverlay) filtersOverlay.classList.remove('active');
                 document.body.style.overflow = '';
             });
         }
@@ -487,8 +493,7 @@
                         }
                     }
                 }
-                // Em desktop, o link deve navegar normalmente e o hover CSS cuida do submenu
-            });
+            }); // FECHAMENTO CORRIGIDO AQUI!
 
             // Função para inicializar o estado dos submenus aninhados
             function initializeSubmenuState() {
@@ -506,12 +511,12 @@
             window.addEventListener('resize', initializeSubmenuState); // Adiciona listener para redimensionamento
         });
 
-        // Inicializa o estado dos filtros (EXISTENTE)
-        initializeFilterState();
+            // Inicializa o estado dos filtros (EXISTENTE)
+            initializeFilterState();
 
-        // Adicionar um listener para quando a janela for redimensionada (EXISTENTE)
-        window.addEventListener('resize', initializeFilterState);
-    });
+            // Adicionar um listener para quando a janela for redimensionada (EXISTENTE)
+            window.addEventListener('resize', initializeFilterState);
+        });
 </script>
 
 </body>

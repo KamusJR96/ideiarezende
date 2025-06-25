@@ -18,11 +18,11 @@
                         <img src="logo-rezende.jpg" alt="Logo Rezende Materiais para Construção">
                     </a>
                 </div>
-                <div class="search-bar">
+                <div class="search-bar desktop-search">
                     <input type="text" placeholder="O que procura?">
                     <button><i class="fa-solid fa-search"></i></button>
                 </div>
-                <div class="user-actions">
+                <div class="user-actions desktop-actions">
                     <a href="#" class="action-item"><i class="fa-solid fa-user"></i> Entrar / Cadastrar</a>
                     <a href="#" class="action-item"><i class="fa-solid fa-shopping-cart"></i> Carrinho</a>
                 </div>
@@ -31,7 +31,7 @@
         <nav class="main-nav">
             <div class="wrapper nav-wrapper">
                 <div class="departments-menu">
-                    <button class="departments-button"><i class="fa-solid fa-bars"></i> Departamentos</button>
+                    <button class="departments-button"><i class="fa-solid fa-bars"></i> <span class="departments-text">Departamentos</span></button>
                     <div class="departments-dropdown-content" id="departmentsDropdown">
                         <button class="close-departments-button" id="closeDepartmentsBtn"><i class="fa-solid fa-times"></i> Fechar</button>
                         <div class="has-submenu">
@@ -121,6 +121,12 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="search-bar mobile-nav-search">
+                    <input type="text" placeholder="O que procura?">
+                    <button><i class="fa-solid fa-search"></i></button>
+                </div>
+
                 <ul class="benefits-list">
                     <li><i class="fa-solid fa-percent"></i><span>Descontos</span></li>
                     <li><i class="fa-solid fa-bolt"></i><span>Elétrica</span></li>
@@ -173,10 +179,11 @@
         </section>
     </main>
 
+    <div class="filters-overlay" id="filtersOverlay"></div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // OBS: A lógica da sidebar de filtros abaixo é mais relevante para suvinil-produtos.html.
-            // Ela é mantida aqui para consistência do template de script, mas pode não ter elementos correspondentes no index.html.
+            // Lógica para a sidebar de filtros (presente apenas em suvinil-produtos.html, mas o script pode ser geral)
             const filterTitles = document.querySelectorAll('.filter-group h3');
             const openFiltersBtn = document.getElementById('openFiltersBtn');
             const closeFiltersBtn = document.getElementById('closeFiltersBtn');
