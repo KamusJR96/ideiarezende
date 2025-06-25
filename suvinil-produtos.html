@@ -137,34 +137,45 @@
 
     <main>
         <div class="main-content-area wrapper">
-            <aside class="sidebar-filters">
+            <button class="open-filters-button" id="openFiltersBtn"><i class="fa-solid fa-filter"></i> Filtros</button>
+
+            <aside class="sidebar-filters" id="sidebarFilters">
+                <button class="close-filters-button" id="closeFiltersBtn"><i class="fa-solid fa-times"></i></button>
                 <h2>Filtros</h2>
                 <div class="filter-group">
-                    <h3>Tipo de Tinta</h3>
-                    <label><input type="checkbox" name="tipo_tinta" value="acrilica"> Acrílica</label>
-                    <label><input type="checkbox" name="tipo_tinta" value="latex"> Látex</label>
-                    <label><input type="checkbox" name="tipo_tinta" value="esmalte"> Esmalte</label>
-                    <label><input type="checkbox" name="tipo_tinta" value="verniz"> Verniz</label>
-                    <label><input type="checkbox" name="tipo_tinta" value="manta"> Manta Líquida</label>
+                    <h3>Tipo de Tinta <i class="fa-solid fa-chevron-down"></i></h3>
+                    <div class="filter-content">
+                        <label><input type="checkbox" name="tipo_tinta" value="acrilica"> Acrílica</label>
+                        <label><input type="checkbox" name="tipo_tinta" value="latex"> Látex</label>
+                        <label><input type="checkbox" name="tipo_tinta" value="esmalte"> Esmalte</label>
+                        <label><input type="checkbox" name="tipo_tinta" value="verniz"> Verniz</label>
+                        <label><input type="checkbox" name="tipo_tinta" value="manta"> Manta Líquida</label>
+                    </div>
                 </div>
                 <div class="filter-group">
-                    <h3>Acabamento</h3>
-                    <label><input type="checkbox" name="acabamento" value="fosco"> Fosco</label>
-                    <label><input type="checkbox" name="acabamento" value="acetinado"> Acetinado</label>
-                    <label><input type="checkbox" name="acabamento" value="brilhante"> Brilhante</label>
-                    <label><input type="checkbox" name="acabamento" value="emborrachado"> Emborrachado</label>
+                    <h3>Acabamento <i class="fa-solid fa-chevron-down"></i></h3>
+                    <div class="filter-content">
+                        <label><input type="checkbox" name="acabamento" value="fosco"> Fosco</label>
+                        <label><input type="checkbox" name="acabamento" value="acetinado"> Acetinado</label>
+                        <label><input type="checkbox" name="acabamento" value="brilhante"> Brilhante</label>
+                        <label><input type="checkbox" name="acabamento" value="emborrachado"> Emborrachado</label>
+                    </div>
                 </div>
                 <div class="filter-group">
-                    <h3>Uso</h3>
-                    <label><input type="checkbox" name="uso" value="interno"> Interno</label>
-                    <label><input type="checkbox" name="uso" value="externo"> Externo</label>
-                    <label><input type="checkbox" name="uso" value="madeira"> Madeira</label>
-                    <label><input type="checkbox" name="uso" value="metal"> Metal</label>
+                    <h3>Uso <i class="fa-solid fa-chevron-down"></i></h3>
+                    <div class="filter-content">
+                        <label><input type="checkbox" name="uso" value="interno"> Interno</label>
+                        <label><input type="checkbox" name="uso" value="externo"> Externo</label>
+                        <label><input type="checkbox" name="uso" value="madeira"> Madeira</label>
+                        <label><input type="checkbox" name="uso" value="metal"> Metal</label>
+                    </div>
                 </div>
                 <div class="filter-group">
-                    <h3>Preço</h3>
-                    <input type="range" min="0" max="500" value="500" class="slider" id="priceRange">
-                    <p>Até R$ <span id="priceValue">500</span></p>
+                    <h3>Preço <i class="fa-solid fa-chevron-down"></i></h3>
+                    <div class="filter-content">
+                        <input type="range" min="0" max="500" value="500" class="slider" id="priceRange">
+                        <p>Até R$ <span id="priceValue">500</span></p>
+                    </div>
                 </div>
                 <button class="apply-filters">Aplicar Filtros</button>
             </aside>
@@ -310,6 +321,93 @@
                 </section>
             </section>
         </div> </main>
+
+<div class="filters-overlay" id="filtersOverlay"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterTitles = document.querySelectorAll('.filter-group h3');
+        const openFiltersBtn = document.getElementById('openFiltersBtn');
+        const closeFiltersBtn = document.getElementById('closeFiltersBtn');
+        const sidebarFilters = document.getElementById('sidebarFilters');
+        const filtersOverlay = document.getElementById('filtersOverlay');
+
+        // Função para inicializar o estado dos filtros (colapsados em mobile, expandidos em desktop)
+        function initializeFilterState() {
+            filterTitles.forEach(title => {
+                const content = title.nextElementSibling;
+                if (window.innerWidth <= 768) {
+                    title.classList.add('collapsed');
+                    if (content && content.classList.contains('filter-content')) {
+                        content.classList.remove('show');
+                    }
+                } else {
+                    title.classList.remove('collapsed', 'expanded');
+                    if (content && content.classList.contains('filter-content')) {
+                        content.classList.add('show');
+                    }
+                }
+            });
+
+            // Gerencia a visibilidade do botão "Filtros" e da sidebar
+            if (window.innerWidth <= 768) {
+                if (openFiltersBtn) openFiltersBtn.style.display = 'flex';
+                if (sidebarFilters) sidebarFilters.classList.remove('active'); // Garante que esteja fechado ao carregar
+                if (filtersOverlay) filtersOverlay.classList.remove('active'); // Garante que o overlay também esteja fechado
+                document.body.style.overflow = ''; // Garante que a rolagem do body seja restaurada ao redimensionar para mobile
+            } else {
+                if (openFiltersBtn) openFiltersBtn.style.display = 'none';
+                if (sidebarFilters) sidebarFilters.classList.remove('active'); // Garante que não esteja ativo no desktop
+                if (filtersOverlay) filtersOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Event Listeners para os títulos dos filtros (expandir/colapsar)
+        filterTitles.forEach(title => {
+            title.addEventListener('click', function() {
+                // Sempre permite expandir/colapsar, mas a visualização do menu em si depende da sidebar.active
+                const content = this.nextElementSibling;
+                if (content && content.classList.contains('filter-content')) {
+                    content.classList.toggle('show');
+                    this.classList.toggle('collapsed');
+                    this.classList.toggle('expanded');
+                }
+            });
+        });
+
+        // Event Listeners para abrir e fechar o menu de filtros em mobile
+        if (openFiltersBtn) {
+            openFiltersBtn.addEventListener('click', function() {
+                if (sidebarFilters) sidebarFilters.classList.add('active');
+                if (filtersOverlay) filtersOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Evita rolagem do body quando overlay está ativo
+            });
+        }
+
+        if (closeFiltersBtn) {
+            closeFiltersBtn.addEventListener('click', function() {
+                if (sidebarFilters) sidebarFilters.classList.remove('active');
+                if (filtersOverlay) filtersOverlay.classList.remove('active');
+                document.body.style.overflow = ''; // Restaura rolagem do body
+            });
+        }
+
+        if (filtersOverlay) {
+            filtersOverlay.addEventListener('click', function() {
+                if (sidebarFilters) sidebarFilters.classList.remove('active');
+                if (filtersOverlay) filtersOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        }
+
+        // Inicializa o estado dos filtros e botões ao carregar a página
+        initializeFilterState();
+
+        // Adicionar um listener para quando a janela for redimensionada
+        window.addEventListener('resize', initializeFilterState);
+    });
+</script>
 
 </body>
 </html>

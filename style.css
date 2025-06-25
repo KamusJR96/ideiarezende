@@ -549,6 +549,27 @@ a {
     color: #ccc;
     margin-top: 0;
     margin-bottom: 10px;
+    cursor: pointer; /* Indica que o título é clicável */
+    display: flex; /* Para alinhar o texto e o ícone */
+    justify-content: space-between; /* Empurra o ícone para a direita */
+    align-items: center;
+    padding-right: 5px; /* Pequeno padding para o ícone */
+}
+
+.sidebar-filters h3 i {
+    transition: transform 0.3s ease; /* Animação para a seta */
+}
+
+.sidebar-filters h3.collapsed i {
+    transform: rotate(-90deg); /* Seta para baixo quando colapsado */
+}
+
+.sidebar-filters h3.expanded i {
+    transform: rotate(0deg); /* Seta para cima quando expandido */
+}
+
+.filter-content {
+    display: block; /* Visível por padrão no desktop */
 }
 
 .filter-group label {
@@ -589,6 +610,75 @@ a {
 
 .sidebar-filters .apply-filters:hover {
     background-color: #e67e00;
+}
+
+
+/* Estilos para o botão de abrir filtros em mobile */
+.open-filters-button {
+    display: none; /* Escondido por padrão no desktop */
+    width: calc(100% - 40px); /* Ocupa a largura do wrapper - padding */
+    max-width: 300px; /* Limite de largura para não ficar muito grande */
+    margin: 20px auto 10px auto; /* Centraliza e adiciona margem */
+    padding: 12px 15px;
+    background-color: #ff8c00;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: background-color 0.2s ease;
+}
+
+.open-filters-button i {
+    font-size: 1.2em;
+}
+
+.open-filters-button:hover {
+    background-color: #e67e00;
+}
+
+/* Estilos para o botão de fechar filtros dentro da sidebar em mobile */
+.close-filters-button {
+    display: none; /* Escondido por padrão no desktop */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #eee;
+    font-size: 1.5em;
+    cursor: pointer;
+    z-index: 10; /* Garante que fique acima de outros elementos na sidebar */
+    padding: 5px;
+}
+
+.close-filters-button:hover {
+    color: #ff8c00;
+}
+
+/* Overlay para o fundo quando o filtro estiver aberto */
+.filters-overlay {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo semi-transparente escuro */
+    z-index: 1040; /* Abaixo da sidebar ativa, mas acima do conteúdo */
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+.filters-overlay.active {
+    display: block;
+    opacity: 1;
 }
 
 
@@ -641,36 +731,14 @@ a {
         text-align: center;
     }
 
-    .search-bar {
-        margin: 15px 0;
-        width: 100%;
-        max-width: unset;
-    }
-
+    /* OCULTAR a barra de pesquisa e as ações do usuário */
+    .search-bar,
     .user-actions {
-        width: 100%;
-        justify-content: center;
-        margin-top: 10px;
+        display: none;
     }
 
     .benefits-list {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-        margin-top: 15px;
-    }
-
-    .benefits-list li {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        min-width: 80px;
-        padding: 5px;
-    }
-
-    .benefits-list li i {
-        font-size: 24px;
+        display: none; /* OCULTAR a lista de benefícios em mobile */
     }
 
     .hero-banner {
@@ -719,9 +787,9 @@ a {
         padding-left: 30px;
     }
 
-    /* Responsividade para a página de produtos: 1 coluna em mobile */
+    /* Responsividade para a página de produtos: 2 colunas em mobile */
     .product-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     /* Botões em mobile podem ocupar a largura total ou manter o flex */
@@ -733,5 +801,71 @@ a {
     .product-buttons button {
         font-size: 0.85em;
         padding: 10px 8px;
+    }
+
+    /* Esconder o conteúdo dos filtros em mobile por padrão */
+    .filter-group h3 {
+        margin-bottom: 0; /* Ajusta margem do título quando minimizado */
+        padding-top: 10px; /* Adiciona um pouco de padding */
+        padding-bottom: 10px; /* Adiciona um pouco de padding */
+    }
+
+    .filter-content {
+        display: none; /* Esconde o conteúdo por padrão em mobile */
+        max-height: 0; /* Para transição de altura */
+        overflow: hidden; /* Garante que o conteúdo oculto não apareça */
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out; /* Transição suave */
+    }
+
+    .filter-content.show {
+        max-height: 500px; /* Altura máxima para mostrar o conteúdo (ajuste se necessário) */
+        overflow: visible; /* Permite que o conteúdo seja visível */
+        padding-top: 10px; /* Adiciona padding quando expandido */
+        padding-bottom: 5px; /* Adiciona padding quando expandido */
+    }
+
+    /* Mostrar o botão de abrir filtros apenas em mobile */
+    .open-filters-button {
+        display: flex; /* Flexbox para centralizar ícone e texto */
+    }
+
+    /* Esconder a sidebar e prepará-la para off-canvas em mobile */
+    .sidebar-filters {
+        position: fixed; /* Fixa o menu */
+        top: 0;
+        right: -100%; /* Começa fora da tela, à direita */
+        width: 80%; /* Ocupa 80% da largura da tela */
+        max-width: 320px; /* Limite de largura para o menu */
+        height: 100%;
+        padding: 20px;
+        box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3); /* Sombra para indicar profundidade */
+        z-index: 1050; /* Acima de tudo, incluindo o overlay */
+        transition: right 0.3s ease-out; /* Animação para deslizar */
+        overflow-y: auto; /* Adiciona scroll se o conteúdo for grande */
+        border-radius: 0; /* Remove border-radius */
+    }
+
+    .sidebar-filters.active {
+        right: 0; /* Desliza para a posição visível */
+    }
+
+    /* Mostrar o botão de fechar filtros apenas em mobile dentro da sidebar */
+    .close-filters-button {
+        display: block;
+    }
+
+    /* Ajuste para o título principal "Filtros" na sidebar quando off-canvas */
+    .sidebar-filters h2 {
+        margin-top: 30px; /* Espaço para o botão de fechar */
+        text-align: center; /* Centraliza o título */
+        border-bottom: none; /* Remove borda inferior */
+        padding-bottom: 0; /* Remove padding */
+    }
+
+    .main-content-area {
+        flex-direction: column;
+        align-items: flex-start; /* Alinha o botão de filtros à esquerda */
+        gap: 0; /* Remove gap para não afetar o botão */
+        margin-top: 15px; /* Ajusta margem superior */
     }
 }
