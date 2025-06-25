@@ -302,90 +302,86 @@ a {
     display: block;
 }
 
-/* Seções de Categorias de Produtos (na index.html) */
-.product-categories {
-    margin: 20px auto 40px auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-/* --- NOVO ESTILO PARA A ÁREA DE PRODUTOS PRINCIPAL --- */
-.products-container {
-    flex-grow: 1; /* Permite que o contêiner de produtos ocupe o espaço restante */
-    background-color: transparent; /* --- ALTERAÇÃO: Fundo transparente para ver o cinza do body --- */
-    border-radius: 8px; /* Cantos arredondados */
-    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */ /* Remover sombra aqui se a ideia é só nos cards */
-    padding: 0; /* --- ALTERAÇÃO: Remover padding, cada card terá o seu padding/margem --- */
-}
-
-.page-title {
-    text-align: center;
-    margin: 0 0 20px 0;
-    padding: 20px 0; /* Adiciona padding para o título dentro do products-container (se for o caso) */
-    background-color: #fff; /* Fundo branco para a área do título se estiver dentro do products-container */
-    border-radius: 8px 8px 0 0; /* Apenas topo arredondado */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra suave para o título */
-    margin-bottom: 25px; /* Espaço abaixo do título */
-}
-
-/* --- ESTILO DOS CARDS DE PRODUTO INDIVIDUAIS --- */
-.product-card {
-    background-color: #fff; /* Fundo branco para a caixa do produto */
+/* --- ESTILOS DE CARD BASE PARA AMBAS AS PÁGINAS --- */
+/* Todos os cards (categorias e produtos) herdarão esses estilos visuais */
+.common-card-styles {
+    background-color: #fff; /* Fundo branco para a caixa do card */
     border-radius: 8px; /* Cantos arredondados */
     overflow: hidden; /* Garante que o conteúdo não vaze */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para destacar o card */
     text-align: center;
     transition: transform 0.2s ease-in-out;
-    display: flex; /* Para organizar o conteúdo verticalmente */
-    flex-direction: column; /* Conteúdo um abaixo do outro */
-    justify-content: space-between; /* Empurra os botões para baixo */
     border: 1px solid #eee; /* Borda sutil para definir a "caixa" */
+    
+    /* Para organizar o conteúdo verticalmente dentro do card */
+    display: flex;
+    flex-direction: column;
 }
 
-.product-card:hover {
+.common-card-styles:hover {
     transform: translateY(-5px);
 }
 
-.product-card img {
+/* --- Seções de Categorias de Produtos (na index.html) --- */
+.product-categories {
+    margin: 20px auto 40px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    align-items: stretch; /* Garante que todos os cards na mesma linha tenham a mesma altura */
+}
+
+.category-card {
+    /* Herda de .common-card-styles */
+    /* Estilos específicos para o layout interno do card de categoria */
+    /* O justify-content: space-between será aplicado via .common-card-styles, mas ajustamos o card-info */
+}
+
+.category-card img {
     width: 100%;
-    height: 200px;
+    height: 150px;
     object-fit: cover;
     display: block;
     border-bottom: 1px solid #eee;
 }
 
-.product-card h3 {
-    font-size: 1.2em;
-    color: #333;
-    margin: 15px 10px 5px 10px;
+/* --- ESTILO DA ÁREA DE INFORMAÇÃO DOS CARDS (para CATEGORIAS E PRODUTOS) --- */
+.card-info {
+    padding: 15px;
+    background-color: #fff; /* Garante o fundo branco para a área de info do card */
+    position: relative;
+    z-index: 1;
+    flex-grow: 1; /* Garante que o card-info ocupe o espaço restante */
+    display: flex; /* Torna o card-info um flex container */
+    flex-direction: column; /* Empilha o h3 e p */
+    justify-content: flex-end; /* Alinha o conteúdo ao final (texto) */
+    padding-top: 0; /* Para evitar padding duplicado com o h3/p margin */
 }
 
-/* --- ALTERAÇÃO: Estilo da Descrição do Produto --- */
-.product-card p {
-    font-size: 0.9em;
-    color: #777;
-    margin: 0 10px 15px 10px;
-    min-height: 40px; /* Garante altura mínima para 2-3 linhas */
-    max-height: 60px; /* Garante altura máxima para 3-4 linhas */
-    
-    /* Limitar texto a N linhas com reticências */
+.card-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+    color: #333;
+    text-transform: uppercase;
+}
+
+/* --- ALTERAÇÃO: Estilo da Descrição da Categoria (PÁGINA PRINCIPAL) --- */
+.category-card .card-info p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* Limita a 3 linhas */
+    -webkit-line-clamp: 2; /* Limita a 2 linhas para as categorias na index.html */
     -webkit-box-orient: vertical;
+    min-height: 36px; /* Garante altura para 2 linhas para alinhamento */
+    flex-shrink: 0; /* Evita que encolha */
+    line-height: 1.2em; /* Ajusta a altura da linha para um cálculo mais preciso */
 }
 
-.product-card .price {
-    font-size: 1.4em;
-    font-weight: 700;
-    color: #ff8c00;
-    display: block;
-    margin-bottom: 15px;
-}
 
-/* --- ESTILOS PARA OS BOTÕES --- */
+/* --- ESTILOS PARA OS BOTÕES (da página de produtos) --- */
 .product-buttons {
     display: flex;
     justify-content: center;
@@ -395,7 +391,7 @@ a {
     background-color: #f8f8f8;
     border-top: 1px solid #eee;
     width: 100%;
-    border-radius: 0 0 8px 8px; /* Mantém as bordas arredondadas na parte inferior do card */
+    border-radius: 0 0 8px 8px;
     margin-top: auto; /* Empurra os botões para o final do card */
 }
 
@@ -432,7 +428,7 @@ a {
     transform: translateY(-2px);
 }
 
-/* --- AJUSTES PARA A PÁGINA DE PRODUTOS: GRID DE 3 COLUNAS E MENU LATERAL --- */
+/* --- AJUSTES PARA A PÁGINA DE PRODUTOS (suvinil-produtos.html): GRID DE 3 COLUNAS E MENU LATERAL --- */
 .main-content-area {
     display: flex;
     gap: 25px;
@@ -440,13 +436,78 @@ a {
     align-items: flex-start;
 }
 
+.products-container {
+    flex-grow: 1;
+    background-color: transparent; /* --- ALTERAÇÃO: Fundo transparente para ver o cinza do body por baixo dos cards --- */
+    border-radius: 0; /* Removido arredondamento extra aqui */
+    box-shadow: none; /* Removida sombra extra aqui */
+    padding: 0; /* Removido padding, cada card terá o seu padding/margem */
+}
+
+.page-title {
+    text-align: center;
+    margin: 0 auto 20px auto; /* Centraliza o título, com margem abaixo */
+    padding: 20px; /* Padding interno para o título */
+    background-color: #fff; /* --- ALTERAÇÃO: Fundo branco para a área do título na página de produtos --- */
+    border-radius: 8px; /* Arredondamento para o bloco do título */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra suave para o título */
+    width: 100%; /* Ocupa a largura total */
+}
+
+.page-title h1, .page-title p {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .product-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 25px; /* Espaçamento entre os cards */
-    margin-bottom: 40px;
+    margin-bottom: 40px; /* Mantido espaçamento inferior */
     align-items: stretch; /* Garante que todos os cards na mesma linha tenham a mesma altura */
 }
+
+/* --- ESTILO DOS CARDS DE PRODUTO INDIVIDUAIS (suvinil-produtos.html) --- */
+.product-card {
+    /* Herda de .common-card-styles */
+    /* Já tem display: flex, flex-direction: column do common-card-styles */
+    justify-content: space-between; /* Para empurrar os botões para o final */
+    padding-bottom: 0; /* Controlado pelo .product-buttons */
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px; /* Mantém a altura da imagem dos produtos */
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid #eee;
+}
+
+.product-card p {
+    font-size: 0.9em;
+    color: #777;
+    margin: 0 10px 15px 10px;
+    min-height: 40px; /* Garante altura mínima para 2-3 linhas */
+    max-height: 60px; /* Garante altura máxima para 3-4 linhas */
+    
+    /* Limitar texto a N linhas com reticências */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limita a 3 linhas na página de produtos */
+    -webkit-box-orient: vertical;
+    line-height: 1.2em; /* Ajusta a altura da linha para um cálculo mais preciso */
+}
+
+.product-card .price {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #ff8c00;
+    display: block;
+    margin-bottom: 15px; /* Margem inferior antes dos botões */
+    margin-top: auto; /* Empurra o preço para baixo, empurrando o p para cima */
+}
+
 
 .sidebar-filters {
     flex-shrink: 0;
@@ -530,6 +591,7 @@ a {
     background-color: #e67e00;
 }
 
+
 /* Responsividade básica */
 @media (max-width: 992px) {
     .main-content-area {
@@ -543,6 +605,10 @@ a {
         top: auto;
         width: 100%;
         padding: 15px;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas em tablet */
     }
 }
 
@@ -653,9 +719,9 @@ a {
         padding-left: 30px;
     }
 
-    /* Responsividade para a página de produtos: 2 colunas em mobile */
+    /* Responsividade para a página de produtos: 1 coluna em mobile */
     .product-grid {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        grid-template-columns: 1fr;
     }
 
     /* Botões em mobile podem ocupar a largura total ou manter o flex */
