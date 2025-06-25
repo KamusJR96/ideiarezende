@@ -167,8 +167,8 @@ a {
 }
 
 .departments-dropdown-content {
-    display: none;
-    position: absolute;
+    display: none; /* OCULTAR POR PADRÃO (será exibido por hover em desktop ou JS em mobile) */
+    position: absolute; /* Posição padrão para desktop (sobrepor) */
     background-color: #444; /* Fundo do dropdown mais escuro */
     min-width: 200px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -177,24 +177,29 @@ a {
     top: 100%;
     left: 0;
     margin-top: 5px;
-    padding: 5px 0; /* Adicionado um pequeno padding interno para o dropdown */
 }
 
-.departments-dropdown-content a {
-    color: #eee; /* Cor do texto dos itens do dropdown */
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    white-space: nowrap;
-}
-
-.departments-dropdown-content a:hover {
-    background-color: #555; /* Fundo do item hover mais escuro */
-    color: #ff8c00; /* Laranja para o hover do dropdown */
-}
-
+/* Mostra o dropdown de departamentos em desktop com hover */
 .departments-menu:hover .departments-dropdown-content {
     display: block;
+}
+
+/* NOVO: Estilos para os links do dropdown principal (desktop) */
+@media (min-width: 769px) { /* Aplica apenas para telas maiores que 768px */
+    .departments-dropdown-content a {
+        color: #eee;
+        padding: 12px 16px; /* Aumentado o padding vertical para maior espaçamento */
+        text-decoration: none;
+        display: block;
+        white-space: nowrap;
+        font-size: 15px; /* Aumentado o tamanho da fonte */
+    }
+}
+
+
+/* Estilos para o botão de fechar do menu de departamentos (Corrigido) */
+.close-departments-button {
+    display: none; /* ESCONDIDO POR PADRÃO NO DESKTOP */
 }
 
 /* --- ESTILOS PARA SUBMENUS --- */
@@ -213,11 +218,17 @@ a {
     font-size: 12px; /* Tamanho da seta do submenu */
     margin-left: 10px; /* Espaço entre o texto e a seta */
     color: #ccc; /* Cor da seta */
+    transition: transform 0.3s ease; /* Transição para a seta */
 }
+
+.submenu-arrow.rotate { /* Classe para girar a seta quando expandido */
+    transform: rotate(90deg); /* Gira para baixo/direita */
+}
+
 
 .submenu {
     display: none; /* Oculta o submenu por padrão */
-    position: absolute;
+    position: absolute; /* Posição para submenus de desktop */
     background-color: #555;
     min-width: 180px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -225,17 +236,35 @@ a {
     left: 100%;
     top: 0;
     border-radius: 5px;
-    padding: 5px 0;
     list-style: none;
     margin: 0;
 }
+
+/* Mostra o submenu quando o mouse passa sobre o item pai (.has-submenu) APENAS em desktop */
+@media (min-width: 769px) { /* Aplica apenas para telas maiores que 768px */
+    .has-submenu:hover > .submenu {
+        display: block;
+    }
+
+    /* NOVO: Estilos para os links dos submenus aninhados (desktop) */
+    .submenu li a {
+        color: #eee;
+        padding: 10px 14px; /* Aumentado o padding vertical e horizontal */
+        text-decoration: none;
+        display: block;
+        white-space: nowrap;
+        font-size: 14px; /* Aumentado o tamanho da fonte */
+    }
+}
+
 
 .submenu li a:hover {
     background-color: #666;
     color: #ff8c00;
 }
 
-.departments-menu:hover .departments-dropdown-content {
+/* Classe para exibir o submenu via JavaScript em mobile (com transição) */
+.submenu.open {
     display: block;
 }
 
@@ -467,7 +496,7 @@ a {
     align-items: stretch; /* Garante que todos os cards na mesma linha tenham a mesma altura */
 }
 
-/* --- ESTILO DOS CARDS DE PRODUTO INDIVIDUAIS (suvinil-produtos.html) --- */
+/* --- ESTILO DOS CARDS DE PRODUTO INDIVIDUALS (suvinil-produtos.html) --- */
 .product-card {
     /* Herda de .common-card-styles */
     /* Já tem display: flex, flex-direction: column do common-card-styles */
@@ -754,13 +783,63 @@ a {
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     }
 
-    /* Ajustes para o dropdown em mobile para evitar sobreposição */
+    /* Ajustes para o dropdown de Departamentos em mobile */
     .departments-dropdown-content {
-        position: static;
-        box-shadow: none;
-        width: 100%;
-        min-width: unset;
-        border-top: 1px solid #eee;
+        position: fixed; /* Fixa o menu para ocupar a tela */
+        top: 0;
+        left: -100%; /* Inicia fora da tela, à esquerda */
+        width: 80%; /* Ocupa 80% da largura da tela */
+        max-width: 300px; /* Limite de largura para o menu */
+        height: 100%; /* Ocupa a altura total */
+        background-color: #444; /* Fundo do dropdown mais escuro */
+        box-shadow: 4px 0 10px rgba(0, 0, 0, 0.3); /* Sombra para indicar profundidade */
+        transition: left 0.3s ease-out; /* Animação para deslizar */
+        overflow-y: auto; /* Adiciona scroll se o conteúdo for grande */
+        border-radius: 0; /* Remove border-radius */
+        padding-top: 70px; /* Espaço MAIOR para o botão de fechar no topo */
+        padding-bottom: 20px; /* Padding inferior para rolagem */
+        display: block; /* Mantido como block para permitir a transição de 'left' */
+        z-index: 1020; /* Z-index para estar acima do conteúdo normal e atrás do overlay, se necessário */
+    }
+
+    /* Classe para exibir o dropdown de departamentos em mobile (via JS) */
+    .departments-dropdown-content.active-mobile-dropdown {
+        left: 0; /* Desliza para a posição visível */
+    }
+
+    /* MOSTRAR E ESTILIZAR O BOTÃO DE FECHAR APENAS EM MOBILE DENTRO DO DROPDOWN DE DEPARTAMENTOS */
+    .close-departments-button {
+        display: flex; /* AGORA VISÍVEL EM MOBILE COM ESTILO CORRETO */
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #ff8c00;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 0.9em;
+        font-weight: 600;
+        padding: 8px 12px;
+        cursor: pointer;
+        z-index: 1001; /* Garante que fique acima de tudo no dropdown */
+        align-items: center;
+        gap: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.2s ease;
+    }
+    .close-departments-button i {
+        font-size: 1.1em;
+        color: #fff;
+    }
+    .close-departments-button:hover {
+        background-color: #e67e00;
+    }
+
+
+    /* Ajusta o padding dos itens de primeiro nível para o close button (se você tiver título) */
+    .departments-dropdown-content > div.has-submenu > a {
+        padding-top: 15px;
+        padding-bottom: 15px;
     }
 
     /* Submenu em mobile: eles devem aparecer empilhados abaixo do item pai */
@@ -771,37 +850,38 @@ a {
 
     .has-submenu > a {
         justify-content: flex-start;
-        padding-left: 20px;
+        /* Padding esquerdo dos itens de primeiro nível */
+        padding-left: 20px; 
     }
 
     .submenu {
-        position: static;
-        display: block;
+        position: static; /* Torna o submenu parte do fluxo normal */
         width: 100%;
         box-shadow: none;
         background-color: #555;
-        padding-left: 20px;
+        /* CORREÇÃO: Remover padding-left excessivo para submenus aninhados */
+        padding-left: 0; /* Garante que não haja deslocamento horizontal extra para o submenu em si */
+        max-height: 0; /* Oculto por padrão, para transição */
+        overflow: hidden; /* Garante que o conteúdo oculto não apareça */
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out; /* Transição suave */
     }
 
+    /* CORREÇÃO: Remover padding-left excessivo para os LINKS dentro dos submenus */
     .submenu li a {
-        padding-left: 30px;
+        /* O padding-left anterior era 30px, que era o que causava o deslocamento. */
+        /* Podemos manter um padding menor para indentação visual, ou zerar se não quiser indentação. */
+        padding-left: 10px; /* Reduzido para um leve recuo, ou 0px para nenhum recuo */
+        font-size: 1em; /* Mantém o tamanho da fonte ou ajuste se necessário */
     }
 
-    /* Responsividade para a página de produtos: 2 colunas em mobile */
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr);
+    /* Estilo para o submenu aberto em mobile (via JS) */
+    .submenu.open {
+        max-height: 500px; /* Altura máxima para mostrar o conteúdo (ajuste se necessário) */
+        overflow: visible; /* Permite que o conteúdo seja visível */
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
 
-    /* Botões em mobile podem ocupar a largura total ou manter o flex */
-    .product-buttons {
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .product-buttons button {
-        font-size: 0.85em;
-        padding: 10px 8px;
-    }
 
     /* Esconder o conteúdo dos filtros em mobile por padrão */
     .filter-group h3 {
@@ -837,12 +917,16 @@ a {
         width: 80%; /* Ocupa 80% da largura da tela */
         max-width: 320px; /* Limite de largura para o menu */
         height: 100%;
-        padding: 20px;
+        /* Ajuste do padding inferior para acomodar o botão fixo */
+        padding: 20px 20px 80px 20px;
         box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3); /* Sombra para indicar profundidade */
         z-index: 1050; /* Acima de tudo, incluindo o overlay */
         transition: right 0.3s ease-out; /* Animação para deslizar */
-        overflow-y: auto; /* Adiciona scroll se o conteúdo for grande */
+        overflow-y: hidden; /* Oculta a barra de rolagem principal, a rolagem será do .sidebar-filters-content-scroll */
         border-radius: 0; /* Remove border-radius */
+        display: flex; /* Transforma em flex container */
+        flex-direction: column; /* Organiza os itens em coluna */
+        justify-content: flex-start; /* Alinha o conteúdo ao topo */
     }
 
     .sidebar-filters.active {
@@ -860,8 +944,30 @@ a {
         text-align: center; /* Centraliza o título */
         border-bottom: none; /* Remove borda inferior */
         padding-bottom: 0; /* Remove padding */
+        flex-shrink: 0; /* Impede que encolha */
     }
 
+    /* Estilo para o botão "Aplicar Filtros" fixo em mobile */
+    .sidebar-filters .apply-filters {
+        position: absolute; /* Torna o botão fixo dentro da sidebar */
+        bottom: 0; /* Alinha na parte inferior */
+        left: 0;
+        width: 100%; /* Ocupa a largura total da sidebar */
+        border-radius: 0; /* Remove o border-radius para preencher as bordas */
+        padding: 15px 20px; /* Ajusta o padding para ser mais confortável */
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Sombra superior para destacar */
+        z-index: 1060; /* Garante que fique acima do conteúdo da sidebar */
+        flex-shrink: 0; /* Impede que encolha */
+    }
+
+    /* Adiciona um wrapper para o conteúdo rolável da sidebar, excluindo o título e o botão */
+    .sidebar-filters-content-scroll {
+        flex-grow: 1; /* Ocupa o espaço restante */
+        overflow-y: auto; /* Permite rolagem apenas para este conteúdo */
+        -webkit-overflow-scrolling: touch; /* Rolagem suave em iOS */
+        padding-bottom: 20px; /* Espaçamento interno antes do botão fixo */
+    }
+    
     .main-content-area {
         flex-direction: column;
         align-items: flex-start; /* Alinha o botão de filtros à esquerda */

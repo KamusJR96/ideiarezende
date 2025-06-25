@@ -32,7 +32,8 @@
             <div class="wrapper nav-wrapper">
                 <div class="departments-menu">
                     <button class="departments-button"><i class="fa-solid fa-bars"></i> Departamentos</button>
-                    <div class="departments-dropdown-content">
+                    <div class="departments-dropdown-content" id="departmentsDropdown">
+                        <button class="close-departments-button" id="closeDepartmentsBtn"><i class="fa-solid fa-times"></i> Fechar</button>
                         <div class="has-submenu">
                             <a href="#">Descontos <i class="fa-solid fa-caret-right submenu-arrow"></i></a>
                             <ul class="submenu">
@@ -142,42 +143,43 @@
             <aside class="sidebar-filters" id="sidebarFilters">
                 <button class="close-filters-button" id="closeFiltersBtn"><i class="fa-solid fa-times"></i></button>
                 <h2>Filtros</h2>
-                <div class="filter-group">
-                    <h3>Tipo de Tinta <i class="fa-solid fa-chevron-down"></i></h3>
-                    <div class="filter-content">
-                        <label><input type="checkbox" name="tipo_tinta" value="acrilica"> Acrílica</label>
-                        <label><input type="checkbox" name="tipo_tinta" value="latex"> Látex</label>
-                        <label><input type="checkbox" name="tipo_tinta" value="esmalte"> Esmalte</label>
-                        <label><input type="checkbox" name="tipo_tinta" value="verniz"> Verniz</label>
-                        <label><input type="checkbox" name="tipo_tinta" value="manta"> Manta Líquida</label>
+                <div class="sidebar-filters-content-scroll"> 
+                    <div class="filter-group">
+                        <h3>Tipo de Tinta <i class="fa-solid fa-chevron-down"></i></h3>
+                        <div class="filter-content">
+                            <label><input type="checkbox" name="tipo_tinta" value="acrilica"> Acrílica</label>
+                            <label><input type="checkbox" name="tipo_tinta" value="latex"> Látex</label>
+                            <label><input type="checkbox" name="esmalte"> Esmalte</label>
+                            <label><input type="checkbox" name="verniz"> Verniz</label>
+                            <label><input type="checkbox" name="manta"> Manta Líquida</label>
+                        </div>
                     </div>
-                </div>
-                <div class="filter-group">
-                    <h3>Acabamento <i class="fa-solid fa-chevron-down"></i></h3>
-                    <div class="filter-content">
-                        <label><input type="checkbox" name="acabamento" value="fosco"> Fosco</label>
-                        <label><input type="checkbox" name="acabamento" value="acetinado"> Acetinado</label>
-                        <label><input type="checkbox" name="acabamento" value="brilhante"> Brilhante</label>
-                        <label><input type="checkbox" name="acabamento" value="emborrachado"> Emborrachado</label>
+                    <div class="filter-group">
+                        <h3>Acabamento <i class="fa-solid fa-chevron-down"></i></h3>
+                        <div class="filter-content">
+                            <label><input type="checkbox" name="acabamento" value="fosco"> Fosco</label>
+                            <label><input type="checkbox" name="acabamento" value="acetinado"> Acetinado</label>
+                            <label><input type="checkbox" name="acabamento" value="brilhante"> Brilhante</label>
+                            <label><input type="checkbox" name="acabamento" value="emborrachado"> Emborrachado</label>
+                        </div>
                     </div>
-                </div>
-                <div class="filter-group">
-                    <h3>Uso <i class="fa-solid fa-chevron-down"></i></h3>
-                    <div class="filter-content">
-                        <label><input type="checkbox" name="uso" value="interno"> Interno</label>
-                        <label><input type="checkbox" name="uso" value="externo"> Externo</label>
-                        <label><input type="checkbox" name="uso" value="madeira"> Madeira</label>
-                        <label><input type="checkbox" name="uso" value="metal"> Metal</label>
+                    <div class="filter-group">
+                        <h3>Uso <i class="fa-solid fa-chevron-down"></i></h3>
+                        <div class="filter-content">
+                            <label><input type="checkbox" name="uso" value="interno"> Interno</label>
+                            <label><input type="checkbox" name="uso" value="externo"> Externo</label>
+                            <label><input type="checkbox" name="uso" value="madeira"> Madeira</label>
+                            <label><input type="checkbox" name="uso" value="metal"> Metal</label>
+                        </div>
                     </div>
-                </div>
-                <div class="filter-group">
-                    <h3>Preço <i class="fa-solid fa-chevron-down"></i></h3>
-                    <div class="filter-content">
-                        <input type="range" min="0" max="500" value="500" class="slider" id="priceRange">
-                        <p>Até R$ <span id="priceValue">500</span></p>
+                    <div class="filter-group">
+                        <h3>Preço <i class="fa-solid fa-chevron-down"></i></h3>
+                        <div class="filter-content">
+                            <input type="range" min="0" max="500" value="500" class="slider" id="priceRange">
+                            <p>Até R$ <span id="priceValue">500</span></p>
+                        </div>
                     </div>
-                </div>
-                <button class="apply-filters">Aplicar Filtros</button>
+                </div> <button class="apply-filters">Aplicar Filtros</button>
             </aside>
 
             <section class="products-container">
@@ -326,13 +328,13 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Lógica para a sidebar de filtros
         const filterTitles = document.querySelectorAll('.filter-group h3');
         const openFiltersBtn = document.getElementById('openFiltersBtn');
         const closeFiltersBtn = document.getElementById('closeFiltersBtn');
         const sidebarFilters = document.getElementById('sidebarFilters');
         const filtersOverlay = document.getElementById('filtersOverlay');
 
-        // Função para inicializar o estado dos filtros (colapsados em mobile, expandidos em desktop)
         function initializeFilterState() {
             filterTitles.forEach(title => {
                 const content = title.nextElementSibling;
@@ -349,24 +351,21 @@
                 }
             });
 
-            // Gerencia a visibilidade do botão "Filtros" e da sidebar
             if (window.innerWidth <= 768) {
                 if (openFiltersBtn) openFiltersBtn.style.display = 'flex';
-                if (sidebarFilters) sidebarFilters.classList.remove('active'); // Garante que esteja fechado ao carregar
-                if (filtersOverlay) filtersOverlay.classList.remove('active'); // Garante que o overlay também esteja fechado
-                document.body.style.overflow = ''; // Garante que a rolagem do body seja restaurada ao redimensionar para mobile
+                if (sidebarFilters) sidebarFilters.classList.remove('active');
+                if (filtersOverlay) filtersOverlay.classList.remove('active');
+                document.body.style.overflow = '';
             } else {
                 if (openFiltersBtn) openFiltersBtn.style.display = 'none';
-                if (sidebarFilters) sidebarFilters.classList.remove('active'); // Garante que não esteja ativo no desktop
+                if (sidebarFilters) sidebarFilters.classList.remove('active');
                 if (filtersOverlay) filtersOverlay.classList.remove('active');
                 document.body.style.overflow = '';
             }
         }
 
-        // Event Listeners para os títulos dos filtros (expandir/colapsar)
         filterTitles.forEach(title => {
             title.addEventListener('click', function() {
-                // Sempre permite expandir/colapsar, mas a visualização do menu em si depende da sidebar.active
                 const content = this.nextElementSibling;
                 if (content && content.classList.contains('filter-content')) {
                     content.classList.toggle('show');
@@ -376,12 +375,11 @@
             });
         });
 
-        // Event Listeners para abrir e fechar o menu de filtros em mobile
         if (openFiltersBtn) {
             openFiltersBtn.addEventListener('click', function() {
                 if (sidebarFilters) sidebarFilters.classList.add('active');
                 if (filtersOverlay) filtersOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Evita rolagem do body quando overlay está ativo
+                document.body.style.overflow = 'hidden';
             });
         }
 
@@ -389,22 +387,129 @@
             closeFiltersBtn.addEventListener('click', function() {
                 if (sidebarFilters) sidebarFilters.classList.remove('active');
                 if (filtersOverlay) filtersOverlay.classList.remove('active');
-                document.body.style.overflow = ''; // Restaura rolagem do body
+                document.body.style.overflow = '';
             });
         }
 
         if (filtersOverlay) {
             filtersOverlay.addEventListener('click', function() {
                 if (sidebarFilters) sidebarFilters.classList.remove('active');
-                if (filtersOverlay) filtersOverlay.classList.remove('active');
+                if (filtersOverlay) filtersFilters.classList.remove('active'); // Corrigido: filtersFilters -> filtersOverlay
                 document.body.style.overflow = '';
             });
         }
 
-        // Inicializa o estado dos filtros e botões ao carregar a página
+        // CÓDIGO PARA O MENU DE DEPARTAMENTOS EM MOBILE (Adicionado/Verificado para funcionar aqui)
+        const departmentsDropdown = document.getElementById('departmentsDropdown');
+        const departmentsButton = document.querySelector('.departments-button'); // Botão que abre o menu
+        const closeDepartmentsBtn = document.getElementById('closeDepartmentsBtn'); // Novo botão de fechar
+
+        // Função para fechar o dropdown de departamentos
+        function closeDepartmentsDropdown() {
+            if (departmentsDropdown) {
+                departmentsDropdown.classList.remove('active-mobile-dropdown');
+                document.body.style.overflow = ''; // Restaura rolagem do body
+                if (departmentsButton) departmentsButton.focus(); // Opcional: foca no botão para acessibilidade
+            }
+        }
+
+        // Adiciona evento de clique ao botão de fechar
+        if (closeDepartmentsBtn) {
+            closeDepartmentsBtn.addEventListener('click', function() {
+                closeDepartmentsDropdown();
+            });
+        }
+
+        // Adiciona evento de clique ao botão "Departamentos" para alternar visibilidade em mobile
+        if (departmentsButton) {
+            departmentsButton.addEventListener('click', function() {
+                if (window.innerWidth <= 768) { // Apenas em mobile
+                    if (departmentsDropdown) {
+                        departmentsDropdown.classList.toggle('active-mobile-dropdown');
+                        if (departmentsDropdown.classList.contains('active-mobile-dropdown')) {
+                            document.body.style.overflow = 'hidden'; // Impede rolagem do body quando menu está aberto
+                        } else {
+                            document.body.style.overflow = ''; // Restaura rolagem
+                        }
+                    }
+                }
+                // Em desktop, o comportamento de hover CSS já cuida da abertura.
+            });
+        }
+
+        // Lógica para fechar o dropdown ao clicar fora dele em mobile
+        document.addEventListener('click', function(event) {
+            if (window.innerWidth <= 768) {
+                const isClickInsideDropdown = departmentsDropdown && departmentsDropdown.contains(event.target);
+                const isClickOnDepartmentsButton = departmentsButton && departmentsButton.contains(event.target);
+
+                if (departmentsDropdown && departmentsDropdown.classList.contains('active-mobile-dropdown') && !isClickInsideDropdown && !isClickOnDepartmentsButton) {
+                    closeDepartmentsDropdown();
+                }
+            }
+        });
+
+        // Adapta o comportamento do dropdown ao redimensionar (de desktop para mobile e vice-versa)
+        function handleDepartmentsDropdownResize() {
+            if (departmentsDropdown) {
+                if (window.innerWidth <= 768) {
+                    // Garante que o dropdown de departamentos esteja oculto e controle via JS
+                    departmentsDropdown.classList.remove('active-mobile-dropdown');
+                    departmentsDropdown.style.display = ''; // Limpa o display style para que o CSS de off-canvas atue
+                    document.body.style.overflow = ''; // Garante rolagem do body
+                } else {
+                    // Em desktop, garante que o display seja controlado por CSS (hover) e a classe mobile seja removida
+                    departmentsDropdown.classList.remove('active-mobile-dropdown');
+                    departmentsDropdown.style.display = ''; // Permite que o CSS externo (hover) atue
+                    document.body.style.overflow = ''; // Garante rolagem do body
+                }
+            }
+        }
+
+        window.addEventListener('resize', handleDepartmentsDropdownResize);
+        handleDepartmentsDropdownResize(); // Inicializa ao carregar
+
+        // CÓDIGO PARA OS SUBMENUS ANINHADOS NO MENU DE DEPARTAMENTOS EM MOBILE
+        const departmentSubmenuParents = document.querySelectorAll('.departments-dropdown-content .has-submenu');
+
+        departmentSubmenuParents.forEach(parentItem => {
+            const link = parentItem.querySelector('a');
+            const submenu = parentItem.querySelector('.submenu');
+            const arrow = parentItem.querySelector('.submenu-arrow');
+
+            link.addEventListener('click', function(event) {
+                if (window.innerWidth <= 768) { // Apenas em mobile
+                    event.preventDefault(); // Impede a navegação imediata em mobile
+                    if (submenu) {
+                        submenu.classList.toggle('open');
+                        if (arrow) {
+                            arrow.classList.toggle('rotate');
+                        }
+                    }
+                }
+                // Em desktop, o link deve navegar normalmente e o hover CSS cuida do submenu
+            });
+
+            // Função para inicializar o estado dos submenus aninhados
+            function initializeSubmenuState() {
+                if (window.innerWidth <= 768) { // Mobile
+                    if (submenu) submenu.classList.remove('open'); // Garante que estejam fechados
+                    if (arrow) arrow.classList.remove('rotate'); // Garante que a seta não esteja girada
+                } else { // Desktop
+                    // Em desktop, o comportamento é por CSS (hover). Apenas removemos as classes de controle mobile.
+                    if (submenu) submenu.classList.remove('open');
+                    if (arrow) arrow.classList.remove('rotate');
+                }
+            }
+
+            initializeSubmenuState(); // Inicializa o estado do submenu ao carregar
+            window.addEventListener('resize', initializeSubmenuState); // Adiciona listener para redimensionamento
+        });
+
+        // Inicializa o estado dos filtros (EXISTENTE)
         initializeFilterState();
 
-        // Adicionar um listener para quando a janela for redimensionada
+        // Adicionar um listener para quando a janela for redimensionada (EXISTENTE)
         window.addEventListener('resize', initializeFilterState);
     });
 </script>
