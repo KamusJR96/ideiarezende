@@ -800,3 +800,46 @@ main.wrapper > * + * {
         flex-basis: 100%;
     }
 }
+
+/* ============================================= */
+/* AJUSTES PARA O LAYOUT MOBILE (BANNER E BENEFÍCIOS) */
+/* ============================================= */
+
+@media (max-width: 768px) {
+
+    /* 1. AUMENTA A ALTURA DO BANNER PRINCIPAL */
+    .hero-banner {
+        /*
+         * Define uma altura máxima maior para o banner em telas mobile.
+         * O valor anterior era herdado do desktop. Agora, ele terá 250px de altura.
+         * Sinta-se à vontade para testar outros valores como 280px ou 300px.
+        */
+        max-height: 999px;
+    }
+
+    /* 2. DEIXA A BARRA DE BENEFÍCIOS MENOR E MAIS COMPACTA */
+    .info-bar {
+        /* * Reduz o espaçamento interno (preenchimento) da barra de benefícios.
+         * Antes era 25px, agora será 15px na parte de cima e de baixo.
+        */
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .info-bar .wrapper {
+        /* Reduz o espaço vertical entre os itens quando eles estão empilhados */
+        gap: 10px;
+    }
+
+    .info-item i {
+        /* * Diminui o tamanho do ícone. 
+         * Antes era 32px, agora será 24px.
+        */
+        font-size: 18px;
+    }
+
+    .info-item span {
+        /* Diminui levemente o tamanho da fonte para economizar espaço */
+        font-size: 13px;
+    }
+}
