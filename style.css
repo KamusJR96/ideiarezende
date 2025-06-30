@@ -13,7 +13,14 @@ body {
     background-color: #dcdcdc; /* Cor de fundo "cimento queimado" */
     color: #333;
     line-height: 1.6;
-    padding-top: 115px; /* Altura do header (62px) + altura do nav (~43-49px) = ~105-111px. Valor seguro */
+}
+
+/* Ajuste para o header fixo em desktop */
+@media (min-width: 769px) {
+    body {
+        /* VALOR AUMENTADO PARA GARANTIR O ESPAÇAMENTO VISÍVEL ABAIXO DO NAV FIXO */
+        padding-top: 142px; 
+    }
 }
 
 a {
@@ -21,26 +28,30 @@ a {
     color: inherit;
 }
 
-/* Classe Wrapper para centralizar e dar padding lateral */
 .wrapper {
-    max-width: 1200px; /* Largura máxima para todo o conteúdo alinhado */
-    margin: 0 auto; /* Centraliza o wrapper na página */
-    padding: 0 20px; /* Padding lateral consistente para todos os blocos */
-    width: 100%; /* Garante que ocupe a largura disponível dentro do max-width */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
 }
 
 /* Header Principal */
 .main-header {
-    background-color: #222; /* Cor de fundo preta para o cabeçalho */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 11px 0; /* Aumentado o padding vertical em 1px em cima e 1px embaixo */
-    color: #fff; /* Cor do texto no cabeçalho para branco */
-    position: fixed;
-    top: 0;
-    left: 0;
+    background-color: #222;
+    color: #fff;
+    padding: 11px 0;
     width: 100%;
-    z-index: 1000; /* Garante que o header fique acima de outros elementos */
-    height: 62px; /* Definindo altura explícita para facilitar o cálculo do nav */
+    z-index: 1000;
+}
+
+@media (min-width: 769px) {
+    .main-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 62px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 }
 
 .header-top-bar {
@@ -52,16 +63,20 @@ a {
 .logo img {
     height: 40px;
     vertical-align: middle;
-    filter: brightness(0) invert(1); /* Ajusta a altura do logo e inverte as cores para branco */
+    filter: brightness(0) invert(1);
 }
 
-/* Esconde a barra de pesquisa e as ações do usuário do desktop por padrão no mobile */
-.desktop-search,
-.desktop-actions {
-    display: flex; /* Visível por padrão no desktop */
+.desktop-search, .desktop-actions {
+    display: none; /* Escondido por padrão, visível em desktop */
 }
 
-.search-bar { /* Estilo base para todas as barras de pesquisa */
+@media (min-width: 769px) {
+    .desktop-search, .desktop-actions {
+        display: flex;
+    }
+}
+
+.search-bar {
     display: flex;
     flex-grow: 1;
     margin: 0 20px;
@@ -72,16 +87,16 @@ a {
 .search-bar input {
     width: 100%;
     padding: 10px 40px 10px 15px;
-    border: 1px solid #555; /* Borda do input mais escura */
+    border: 1px solid #555;
     border-radius: 20px;
     font-size: 14px;
     outline: none;
-    background-color: #333; /* Fundo do input mais escuro */
-    color: #eee; /* Cor do texto do input */
+    background-color: #333;
+    color: #eee;
 }
 
 .search-bar input::placeholder {
-    color: #d3d3d3; /* Cor do placeholder */
+    color: #d3d3d3;
 }
 
 .search-bar button {
@@ -92,7 +107,7 @@ a {
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    color: #ff8c00; /* Cor do ícone de busca */
+    color: #ff8c00;
     font-size: 16px;
     padding: 0;
 }
@@ -107,38 +122,33 @@ a {
 .user-actions .action-item {
     display: flex;
     align-items: center;
-    gap: 5px; /* Espaço entre ícone e texto no desktop */
-    color: #fff; /* Cor do texto das ações do usuário para branco */
+    gap: 5px;
+    color: #fff;
     white-space: nowrap;
 }
 
 .user-actions .action-item i {
-    font-size: 24px; /* Aumentado para 24px (tamanho desktop) */
-    color: #ff8c00; /* Laranja para ícones de ação do usuário */
+    font-size: 24px;
+    color: #ff8c00;
 }
 
-/* Navegação Principal (Menu de Departamentos e Benefícios) */
+/* Navegação Principal */
 .main-nav {
-    background-color: #333; /* Cor de fundo da navegação para cinza escuro */
-    border-top: 0px solid #555; /* Borda superior mais escura */
-    padding: 3px 0 3px 0; /* Aumentado padding-top para 8px, mantendo padding-bottom em 1px */
-    margin-top: 0; /* Remover margem superior */
-    margin-bottom: 0; /* Remover margem inferior */
-    position: fixed;
-    top: 60px; /* Posiciona o nav exatamente abaixo do header. Altura do header é ~62px. */
-    left: 0;
+    background-color: #333;
+    padding: 3px 0;
     width: 100%;
-    z-index: 999; /* Um pouco abaixo do header, mas ainda fixo */
-    height: auto; /* Deixar a altura automática para acomodar o conteúdo */
-    min-height: 40px; /* Garante uma altura mínima para o nav, baseada no conteúdo */
+    z-index: 999;
+}
+
+@media (min-width: 769px) {
+    .main-nav {
+        position: fixed;
+        top: 62px;
+        left: 0;
+    }
 }
 
 .nav-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px; /* Mantém o padding padrão */
-    width: 100%;
-
     display: flex;
     align-items: center;
     gap: 15px;
@@ -146,7 +156,7 @@ a {
 }
 
 .departments-button {
-    background-color: #ff8c00; /* Laranja para o botão Departamentos */
+    background-color: #ff8c00;
     color: #fff;
     padding: 10px 15px;
     border: none;
@@ -166,141 +176,125 @@ a {
     font-size: 20px;
 }
 
-/* Esconde o texto "Departamentos" por padrão no desktop. Será visível em mobile. */
-.departments-button .departments-text {
-    display: inline; /* Visível por padrão no desktop */
-}
-
-/* Barra de pesquisa que aparece no nav, mas apenas em mobile */
 .mobile-nav-search {
-    display: none; /* Escondida por padrão no desktop */
+    display: none; /* Escondido por padrão, visível em mobile */
 }
 
-/* Estilos para o Menu Dropdown de Departamentos */
+/* Menu Dropdown de Departamentos */
 .departments-menu {
     position: relative;
-    z-index: 20;
 }
 
 .departments-dropdown-content {
     display: none;
     position: absolute;
     background-color: #444;
-    min-width: 200px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 10;
+    min-width: 220px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 20;
     border-radius: 5px;
-    top: 100%; /* Mantém o topo alinhado com o botão */
+    top: calc(100% + 5px);
     left: 0;
-    margin-top: 0px; /* Reduzir ou zerar esta margem se houver um pequeno espaço visual que quebra o hover */
-    padding-top: 5px; /* Adiciona um pequeno padding no topo do dropdown para "capturar" o mouse mais cedo */
-    padding-bottom: 5px; /* Garante padding na parte inferior */
+    padding: 5px 0;
 }
 
-/* Mostra o dropdown de departamentos em desktop com hover */
-.departments-menu:hover .departments-dropdown-content {
-    display: block;
-}
-
-/* NOVO: Estilos para os links do dropdown principal (desktop) */
-@media (min-width: 769px) { /* Aplica apenas para telas maiores que 768px */
-    .departments-dropdown-content a {
-        color: #eee;
-        padding: 12px 16px; 
-        text-decoration: none;
+/* Mostra o dropdown em desktop com hover */
+@media (min-width: 769px) {
+    .departments-menu:hover .departments-dropdown-content {
         display: block;
-        white-space: nowrap;
-        font-size: 15px;
-        padding-right: 25px; /* Aumenta o padding à direita para o submenu */
     }
 }
 
-
-/* Estilos para o botão de fechar do menu de departamentos (Corrigido) */
-.close-departments-button {
-    display: none; /* ESCONDIDO POR PADRÃO NO DESKTOP */
+.departments-dropdown-content a {
+    color: #eee;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    white-space: nowrap;
+    font-size: 15px;
 }
 
-/* --- ESTILOS PARA SUBMENUS --- */
+.close-departments-button {
+    display: none; /* Escondido por padrão */
+}
+
+/* Submenus */
 .has-submenu {
     position: relative;
 }
 
 .has-submenu > a {
-    display: flex; /* Para alinhar o texto e a seta */
-    justify-content: space-between; /* Para empurrar a seta para a direita */
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    width: 100%; /* Ocupar toda a largura do item pai */
+    width: 100%;
 }
 
 .submenu-arrow {
-    font-size: 12px; /* Tamanho da seta do submenu */
-    margin-left: 10px; /* Espaço entre o texto e a seta */
-    color: #ccc; /* Cor da seta */
-    transition: transform 0.3s ease; /* Transição para a seta */
+    font-size: 12px;
+    margin-left: 10px;
+    color: #ccc;
+    transition: transform 0.3s ease;
 }
 
-.submenu-arrow.rotate { /* Classe para girar a seta quando expandido */
-    transform: rotate(90deg); /* Gira para baixo/direita */
+.submenu-arrow.rotate {
+    transform: rotate(90deg);
 }
-
 
 .submenu {
-    display: none; /* Oculta o submenu por padrão */
-    position: absolute; /* Posição para submenus de desktop */
-    background-color: #555;
-    min-width: 180px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 100;
-    left: 100%;
-    top: 0; /* Alinha o topo do submenu com o topo do item pai */
+    list-style: none;
+    padding-left: 0;
     margin: 0;
-    margin-left: -5px; /* Um pequeno ajuste para sobrepor o item pai e evitar o "buraco" */
+    background-color: #555;
 }
 
-/* Mostra o submenu quando o mouse passa sobre o item pai (.has-submenu) APENAS em desktop */
-@media (min-width: 769px) { /* Aplica apenas para telas maiores que 768px */
+
+@media (min-width: 769px) {
+    .submenu {
+        display: none; /* Esconde no desktop por padrão */
+        position: absolute;
+        left: 100%;
+        top: -5px; /* Alinha com o topo do item pai */
+        background-color: #555;
+        min-width: 200px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        padding: 5px 0;
+    }
     .has-submenu:hover > .submenu {
         display: block;
     }
 }
 
-/* NOVO: Estilos para os links dos submenus aninhados (desktop) */
 .submenu li a {
     color: #eee;
-    padding: 10px 14px; /* Aumentado o padding vertical e horizontal */
-    text-decoration: none;
-    display: block;
-    white-space: nowrap;
-    font-size: 14px; /* Aumentado o tamanho da fonte */
+    padding: 10px 20px;
+    font-size: 14px;
 }
 
-.submenu li a:hover {
+.submenu li a:hover, .departments-dropdown-content > .has-submenu > a:hover {
     background-color: #666;
     color: #ff8c00;
 }
 
-/* Classe para exibir o submenu via JavaScript em mobile (com transição) */
-.submenu.open {
-    display: block;
-}
-
-/* Benefícios List - Ajuste para o link da Suvinil */
+/* Lista de Benefícios (Desktop) */
 .benefits-list {
+    display: none;
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex;
     gap: 15px;
-    flex-wrap: wrap;
-    align-items: flex-start;
+    flex-wrap: nowrap;
+    align-items: center;
     font-size: 13px;
     color: #ccc;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 5px;
     flex-grow: 1;
     justify-content: space-around;
+}
+@media (min-width: 992px) { /* Aparece em telas maiores */
+    .benefits-list {
+        display: flex;
+    }
 }
 
 .benefits-list li {
@@ -309,7 +303,6 @@ a {
     align-items: center;
     text-align: center;
     padding: 5px 0;
-    flex-shrink: 1;
     min-width: 60px;
 }
 
@@ -319,89 +312,110 @@ a {
     margin-bottom: 5px;
 }
 
-.benefits-list li.suvinil-link a {
+.benefits-list li a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    width: 100%;
-    height: 100%;
 }
 
-/* Banner Principal (Hero Section) */
+/* Conteúdo Principal */
+main {
+    /* REMOVIDO PADDING-TOP DAQUI PARA SER CONTROLADO PELO BODY */
+    padding-bottom: 10px; 
+}
+
+/* Regra para espaçamento uniforme entre as seções da página principal */
+main.wrapper > * + * {
+    margin-top: 10px; /* Define o espaço ENTRE as seções */
+}
+
 .hero-banner {
-    position: relative;
+    border-radius: 20px;
     overflow: hidden;
-    border-radius: 8px;
-    height: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px; /* Espaçamento entre Banner e Navi Menu */
+    display: block;
+    max-height: 400px;
+    object-fit: cover;
 }
 
 .hero-banner img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 20px;
     display: block;
+
+
 }
 
-/* --- ESTILOS DE CARD BASE PARA AMBAS AS PÁGINAS --- */
-/* Todos os cards (categorias e produtos) herdarão esses estilos visuais */
+/* Barra de Informações */
+.info-bar {
+    background-color: #f8f8f8;
+    padding: 25px;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    border-radius: 8px;
+}
+
+.info-bar .wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap; 
+    gap: 25px; 
+    padding: 0; 
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 12px; 
+    font-size: 14px;
+    color: #444;
+    font-weight: 500;
+}
+
+.info-item i {
+    font-size: 32px;
+    color: #ff8c00; 
+}
+
+/* Estilos de Card Comuns */
 .common-card-styles {
-    background-color: #fff; /* Fundo branco para a caixa do card */
-    border-radius: 8px; /* Cantos arredondados */
-    overflow: hidden; /* Garante que o conteúdo não vaze */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para destacar o card */
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     text-align: center;
-    transition: transform 0.2s ease-in-out;
-    border: 1px solid #eee; /* Borda sutil para definir a "caixa" */
-    
-    /* Para organizar o conteúdo verticalmente dentro do card */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: 1px solid #eee;
     display: flex;
     flex-direction: column;
 }
 
 .common-card-styles:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
 }
 
-/* --- Seções de Categorias de Produtos (na index.html) --- */
+/* Grid de Categorias (index.html) */
 .product-categories {
-    margin: 20px auto 40px auto;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
-    align-items: stretch; /* Garante que todos os cards na mesma linha tenham a mesma altura */
-}
-
-.category-card {
-    /* Herda de .common-card-styles */
-    /* Estilos específicos para o layout interno do card de categoria */
-    /* O justify-content: space-between será aplicado via .common-card-styles, mas ajustamos o card-info */
 }
 
 .category-card img {
     width: 100%;
-    height: 150px;
+    height: 200px;
     object-fit: cover;
-    display: block;
-    border-bottom: 1px solid #eee;
 }
 
-/* --- ESTILO DA ÁREA DE INFORMAÇÃO DOS CARDS (para CATEGORIAS E PRODUTOS) --- */
-.card-info {
-    padding: 15px;
-    background-color: #fff; /* Garante o fundo branco para a área de info do card */
-    position: relative;
-    z-index: 1;
-    flex-grow: 1; /* Garante que o card-info ocupe o espaço restante */
-    display: flex; /* Torna o card-info um flex container */
-    flex-direction: column; /* Empilha o h3 e p */
-    justify-content: flex-end; /* Alinha o conteúdo ao final (texto) */
-    padding-top: 0; /* Para evitar padding duplicado com o h3/p margin */
+.category-card .card-info {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .card-info h3 {
@@ -411,167 +425,116 @@ a {
     text-transform: uppercase;
 }
 
-/* --- ALTERAÇÃO: Estilo da Descrição da Categoria (PÁGINA PRINCIPAL) --- */
-.category-card .card-info p {
+.card-info p {
     margin: 0;
     font-size: 14px;
     color: #666;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* Limita a 2 linhas para as categorias na index.html */
-    -webkit-box-orient: vertical;
-    min-height: 36px; /* Garante altura para 2 linhas para alinhamento */
-    flex-shrink: 0; /* Evita que encolha */
-    line-height: 1.2em; /* Ajusta a altura da linha para um cálculo mais preciso */
 }
 
-
-/* --- ESTILOS PARA OS BOTÕES (da página de produtos) --- */
-.product-buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Alinha os botões ao centro verticalmente */
-    gap: 5px;
-    padding: 10px;
-    background-color: #f8f8f8;
-    border-top: 1px solid #eee;
-    width: 100%;
-    border-radius: 0 0 8px 8px;
-    margin-top: auto; /* Empurra os botões para o final do card */
-}
-
-.product-buttons button {
-    flex: 1;
-    padding: 10px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9em;
-    font-weight: 600;
-    white-space: nowrap;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-}
-
-.product-card .add-to-cart {
-    background-color: #a0a0a0;
-    color: #fff;
-    border-radius: 5px;
-}
-
-.product-card .add-to-cart:hover {
-    background-color: #8a8a8a;
-    transform: translateY(-2px);
-}
-
-.product-buttons .buy-now {
-    background-color: #28a745;
-    color: #fff;
-}
-
-.product-buttons .buy-now:hover {
-    background-color: #218838;
-    transform: translateY(-2px);
-}
-
-/* --- AJUSTES PARA A PÁGINA DE PRODUTOS (suvinil-produtos.html): GRID DE 3 COLUNAS E MENU LATERAL --- */
+/* Layout da Página de Produtos (suvinil-produtos.html) */
 .main-content-area {
     display: flex;
     gap: 25px;
-    margin-top: 30px; /* Espaço abaixo do nav fixo para o início do conteúdo */
     align-items: flex-start;
 }
 
 .products-container {
     flex-grow: 1;
-    background-color: transparent; /* --- ALTERAÇÃO: Fundo transparente para ver o cinza do body por baixo de-mail os cards --- */
-    border-radius: 0; /* Removido arredondamento extra aqui */
-    box-shadow: none; /* Removida sombra extra aqui */
-    padding: 0; /* Removido padding, cada card terá o seu padding/margem */
 }
 
 .page-title {
     text-align: center;
-    margin: 0 auto 20px auto; /* Centraliza o título, com margem abaixo */
-    padding: 20px; /* Padding interno para o título */
-    background-color: #fff; /* --- ALTERAÇÃO: Fundo branco para a área do título na página de produtos --- */
-    border-radius: 8px; /* Arredondamento para o bloco do título */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra suave para o título */
-    width: 100%; /* Ocupa a largura total */
-}
-
-.page-title h1, .page-title p {
-    margin-left: 0;
-    margin-right: 0;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
 }
 
 .product-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 25px; /* Espaçamento entre os cards */
-    margin-bottom: 40px; /* Mantido espaçamento inferior */
-    align-items: stretch; /* Garante que todos os cards na mesma linha tenham a mesma altura */
+    gap: 25px;
+    margin-bottom: 40px;
 }
 
-/* --- ESTILO DOS CARDS DE PRODUTO INDIVIDUALS (suvinil-produtos.html) --- */
 .product-card {
-    /* Herda de .common-card-styles */
-    /* Já tem display: flex, flex-direction: column do common-card-styles */
-    justify-content: space-between; /* Para empurrar os botões para o final */
-    padding-bottom: 0; /* Controlado pelo .product-buttons */
+    justify-content: space-between;
 }
 
 .product-card img {
     width: 100%;
-    height: 200px; /* Mantém a altura da imagem dos produtos */
+    height: 220px;
     object-fit: cover;
-    display: block;
-    border-bottom: 1px solid #eee;
+}
+
+.product-card h3 {
+    font-size: 1.1em;
+    margin: 15px 10px 10px 10px;
+    min-height: 44px;
 }
 
 .product-card p {
     font-size: 0.9em;
     color: #777;
     margin: 0 10px 15px 10px;
-    min-height: 40px; /* Garante altura mínima para 2-3 linhas */
-    max-height: 60px; /* Garante altura máxima para 3-4 linhas */
-    
-    /* Limitar texto a N linhas com reticências */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* Limita a 3 linhas na página de produtos */
-    -webkit-box-orient: vertical;
-    line-height: 1.2em; /* Ajusta a altura da linha para um cálculo mais preciso */
+    flex-grow: 1; 
 }
 
 .product-card .price {
-    font-size: 1.4em;
+    font-size: 1.5em;
     font-weight: 700;
     color: #ff8c00;
-    display: block;
-    margin-bottom: 15px; /* Margem inferior antes dos botões */
-    margin-top: auto; /* Empurra o preço para baixo, empurrando o p para cima */
+    margin: 15px 10px;
 }
 
+.product-buttons {
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    background-color: #f8f8f8;
+    border-top: 1px solid #eee;
+}
 
+.product-buttons button {
+    flex: 1;
+    padding: 12px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.add-to-cart {
+    background-color: #a0a0a0;
+    color: #fff;
+}
+.add-to-cart:hover {
+    background-color: #8a8a8a;
+}
+
+.buy-now {
+    background-color: #28a745;
+    color: #fff;
+}
+.buy-now:hover {
+    background-color: #218838;
+}
+
+/* Sidebar de Filtros */
 .sidebar-filters {
-    flex-shrink: 0;
-    width: 250px;
+    flex: 0 0 260px;
     background-color: #333;
     color: #eee;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: sticky;
-    top: 145px; /* (62px header + ~43px nav + 40px (margin-top do .main-content-area)) = 145px */
-    align-self: flex-start;
-    height: fit-content;
+    top: 145px;
 }
 
 .sidebar-filters h2 {
     font-size: 1.5em;
-    color: #eee;
     margin-top: 0;
     margin-bottom: 20px;
     border-bottom: 1px solid #555;
@@ -579,562 +542,261 @@ a {
 }
 
 .filter-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     padding-bottom: 15px;
     border-bottom: 1px solid #555;
 }
-
 .filter-group:last-child {
     border-bottom: none;
     margin-bottom: 0;
-    padding-bottom: 0;
 }
 
 .filter-group h3 {
     font-size: 1.1em;
     color: #ccc;
-    margin-top: 0;
-    margin-bottom: 10px;
-    cursor: pointer; /* Indica que o título é clicável */
-    display: flex; /* Para alinhar o texto e o ícone */
-    justify-content: space-between; /* Empurra o ícone para a direita */
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding-right: 5px; /* Pequeno padding para o ícone */
 }
 
-.sidebar-filters h3 i {
-    transition: transform 0.3s ease; /* Animação para a seta */
+.filter-group h3 i {
+    transition: transform 0.3s ease;
 }
 
-.sidebar-filters h3.collapsed i {
-    transform: rotate(-90deg); /* Seta para baixo quando colapsado */
-}
-
-.sidebar-filters h3.expanded i {
-    transform: rotate(0deg); /* Seta para cima quando expandido */
+.filter-group h3.collapsed i {
+    transform: rotate(-90deg);
 }
 
 .filter-content {
-    display: block; /* Visível por padrão no desktop */
+    display: block;
+    padding-top: 15px;
 }
 
 .filter-group label {
     display: block;
-    font-size: 0.95em;
-    color: #ccc;
     margin-bottom: 8px;
     cursor: pointer;
 }
 
-.filter-group input[type="checkbox"] {
-    margin-right: 8px;
-    transform: scale(1.1);
-}
-
-.filter-group .slider {
-    width: 100%;
-    margin-top: 10px;
-}
-
-.filter-group #priceValue {
-    font-weight: 600;
-    color: #ff8c00;
-}
-
-.sidebar-filters .apply-filters {
+.apply-filters {
     background-color: #ff8c00;
     color: #fff;
     border: none;
-    padding: 12px 20px;
+    padding: 12px;
     border-radius: 5px;
     width: 100%;
     cursor: pointer;
     font-size: 1em;
     font-weight: 600;
-    transition: background-color 0.2s ease;
+    margin-top: 10px;
 }
 
-.sidebar-filters .apply-filters:hover {
+.apply-filters:hover {
     background-color: #e67e00;
 }
 
-
-/* Estilos para o botão de abrir filtros em mobile */
-.open-filters-button {
-    display: none; /* Escondido por padrão no desktop */
-    width: calc(100% - 40px); /* Ocupa a largura do wrapper - padding */
-    max-width: 300px; /* Limite de largura para não ficar muito grande */
-    margin: 20px auto 10px auto; /* Centraliza e adiciona margem */
-    padding: 12px 15px;
-    background-color: #ff8c00;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.1em;
-    font-weight: 600;
-    cursor: pointer;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    transition: background-color 0.2s ease;
+/* Botões e Overlay para Mobile */
+.open-filters-button, .close-departments-button {
+    display: none; 
 }
 
-.open-filters-button i {
-    font-size: 1.2em;
-}
-
-.open-filters-button:hover {
-    background-color: #e67e00;
-}
-
-/* Estilos para o botão de fechar filtros dentro da sidebar em mobile */
-.close-filters-button {
-    display: none; /* Escondido por padrão no desktop */
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    color: #eee;
-    font-size: 1.5em;
-    cursor: pointer;
-    z-index: 10; /* Garante que fique acima de outros elementos na sidebar */
-    padding: 5px;
-}
-
-.close-filters-button:hover {
-    color: #ff8c00;
-}
-
-/* Overlay para o fundo quando o filtro estiver aberto */
 .filters-overlay {
-    display: none; /* Escondido por padrão */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* Fundo semi-transparente escuro */
-    z-index: 1040; /* Abaixo da sidebar ativa, mas acima do conteúdo */
-    transition: opacity 0.3s ease;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 1040;
     opacity: 0;
+    transition: opacity 0.3s ease;
 }
-
 .filters-overlay.active {
     display: block;
     opacity: 1;
 }
 
-/* --- AJUSTES RESPONSIVOS PARA TABLET (max-width: 992px) --- */
-@media (max-width: 992px) {
+
+/* --- Media Queries para Responsividade --- */
+
+/* Tablet */
+@media (max-width: 991px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .sidebar-filters {
+        position: static;
+        width: 100%;
+        margin-bottom: 20px;
+    }
     .main-content-area {
         flex-direction: column;
-        gap: 20px;
-        margin-top: 20px;
     }
 
-    .sidebar-filters {
-        position: relative;
-        top: auto;
-        width: 100%;
-        padding: 15px;
+    .info-bar .wrapper {
+        justify-content: flex-start; 
+        gap: 20px 30px; 
     }
 
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 colunas em tablet */
+    .info-item {
+        flex-basis: calc(50% - 20px);
+        font-size: 13px;
     }
 }
 
-/* --- AJUSTES RESPONSIVOS PARA MOBILE (max-width: 768px) --- */
+/* Mobile */
 @media (max-width: 768px) {
-    body {
-        padding-top: 0; /* Remove padding do body para deixar o header gerenciar seu próprio espaço */
-    }
-
-    .main-header {
-        position: relative; /* Não precisa ser fixo em mobile */
-        height: auto; /* Altura automática para se ajustar ao conteúdo */
-        padding: 10px 0 0 0; /* Ajusta o padding para cima e zera os outros, vamos controlar o espaço interno */
-        border-bottom: 1px solid #444; /* Linha sutil para separar header e nav */
-        box-shadow: none; /* Remove a sombra padrão para um look mais limpo em mobile */
-    }
-    
-    .main-nav {
-        position: relative; /* Não precisa ser fixo em mobile */
-        top: auto;
-        height: auto;
-        margin-top: 0; /* Ajusta a margem superior para ficar rente ao header */
-        margin-bottom: 0;
-    }
-
     .wrapper {
-        padding: 0 10px; /* Padding lateral menor em mobile */
+        padding: 0 10px;
+    }
+    
+    .main-header {
+        padding: 10px 0;
     }
 
-    /* ALINHAMENTO NO HEADER: LOGO, LOGIN/CARRINHO (NA MESMA LINHA, LOGIN/CARRINHO EMPILHADOS) */
     .header-top-bar {
-        flex-direction: row; /* Mantém logo e user-actions na mesma linha */
-        justify-content: space-between; /* Espalha a logo para esquerda e ações para direita */
-        align-items: center; /* Alinha verticalmente */
-        width: 100%;
-        padding-bottom: 10px; /* Padding abaixo para separar do nav */
-        border-bottom: 1px solid #444; /* Linha sutil para separar header e nav */
+        padding: 0 10px;
     }
 
-    .logo {
-        flex-shrink: 0; /* Impede que a logo encolha */
-        margin-right: 10px; /* Espaço à direita da logo */
-    }
-    
     .logo img {
-        height: 35px; /* Reduz o tamanho da logo um pouco em mobile */
-        filter: brightness(0) invert(1); /* Mantém branco */
+        height: 35px;
     }
 
-    /* Esconde a barra de pesquisa que estava no header para desktop */
-    .desktop-search {
-        display: none; 
-    }
-
-    /* As ações do usuário (Login/Carrinho) no header para mobile */
-    .user-actions {
-        display: flex;
-        flex-direction: row; /* ALTERADO: Ícones lado a lado em mobile*/
-        align-items: center; /* Alinha os itens para o centro verticalmente */
-        gap: 15px; /* Aumenta o espaçamento entre os ícones*/
-        font-size: 14px;
-        flex-shrink: 0;
-    }
-    
-    .user-actions .action-item {
-        display: flex;
-        align-items: center;
-        gap: 0; /* Remove gap entre ícone e texto no mobile, já que o texto será oculto */
-        color: #fff;
-        white-space: nowrap;
-        padding: 0; 
-        font-size: 0; /* Zera o tamanho da fonte para ocultar o texto */
-        width: 28px; /* Ajusta a largura para o ícone */
-        height: 28px; /* Ajusta a altura para o ícone */
-        justify-content: center; /* Centraliza o ícone */
-        align-items: center; /* Centraliza o ícone */
-        overflow: hidden; /* Garante que o texto oculto não ocupe espaço */
-    }
-
-    /* Garante que apenas o ícone continue visível e com o tamanho correto */
-    .user-actions .action-item i {
-        font-size: 28px; /* Mantém o tamanho do ícone */
-        width: auto; /* Permite que o ícone determine sua largura natural */
-        height: auto; /* Permite que o ícone determine sua altura natural */
-    }
-
-
-    /* ALINHAMENTO NO NAV MENU: DEPARTAMENTOS (APENAS ÍCONE) E PROCURAR (BARRA DE PESQUISA GRANDE) */
-    .nav-wrapper {
-        flex-direction: row; /* Coloca o botão Departamentos e a barra de pesquisa na mesma linha */
-        align-items: center; /* Alinha verticalmente */
-        justify-content: space-between; /* Espalha o botão e a barra */
-        width: 100%; /* Ocupa a largura total */
-        padding: 5px 10px; /* Ajusta padding para o nav wrapper em mobile */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adiciona sombra para separar do conteúdo */
-    }
-
-    .departments-menu {
-        width: auto; /* Deixa a largura automática para o botão */
-        flex-shrink: 0; /* Impede que encolha */
-    }
-    
-    .departments-button {
-        width: 45px; /* Define largura fixa para o botão, focado no ícone */
-        height: 45px; /* Define altura fixa para o botão */
-        padding: 0; /* Remove padding para focar no ícone */
-        justify-content: center; /* Centraliza o ícone dentro do botão */
-        align-items: center; /* Centraliza verticalmente o ícone */
-    }
-
-    /* Esconde o texto "Departamentos" no botão para mobile */
-    .departments-button .departments-text {
-        display: none; 
-    }
-
-    /* Barra de pesquisa específica para o nav em mobile (visível e maior) */
-    .mobile-nav-search {
-        display: flex; /* Torna a barra de pesquisa visível no nav em mobile */
-        flex-grow: 1; /* Permite que ocupe o espaço restante */
-        margin-left: 10px; /* Espaçamento entre o botão de departamentos e a barra */
-        max-width: none; /* Garante que ocupe a largura total disponível */
-        position: relative;
-    }
-
-    .mobile-nav-search input {
-        width: 100%;
-        padding: 12px 40px 12px 15px; /* Aumentado o padding vertical para campo maior */
-        border: 1px solid #555;
-        border-radius: 20px;
-        font-size: 14px;
-        outline: none;
-        background-color: #333;
-        color: #eee;
-    }
-
-    .mobile-nav-search button {
-        background: none;
-        border: none;
-        position: absolute;
-        right: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        cursor: pointer;
-        color: #ff8c00;
-        font-size: 16px;
-        padding: 0;
-    }
-
-    /* Esconde a lista de benefícios em mobile */
-    .benefits-list {
+    .desktop-search, .benefits-list, .departments-button .departments-text {
         display: none;
     }
 
-    .hero-banner {
-        height: auto;
-        margin: 10px auto;
+    .user-actions .action-item span {
+        display: none; 
     }
-
-    .hero-banner img {
-        height: 200px;
-    }
-
-    .product-categories {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    
+    .user-actions {
         gap: 15px;
     }
 
-    /* Ajustes para o dropdown de Departamentos em mobile (slide-in) */
+    .nav-wrapper {
+        justify-content: space-between;
+    }
+    
+    .mobile-nav-search {
+        display: flex;
+        margin: 0 10px;
+    }
+
     .departments-dropdown-content {
         position: fixed;
         top: 0;
-        left: -100%;
+        left: -100%; 
         width: 80%;
         max-width: 300px;
-        height: 100%;
-        background-color: #444;
-        box-shadow: 4px 0 10px rgba(0, 0, 0, 0.3);
-        transition: left 0.3s ease-out;
+        height: 100vh;
+        background-color: #333;
+        transition: left 0.3s ease;
+        z-index: 1050;
         overflow-y: auto;
-        border-radius: 0;
-        padding-top: 70px;
-        padding-bottom: 20px;
-        display: block; /* Mantido como block para permitir a transição de 'left' */
-        z-index: 1020;
+        padding-top: 60px; 
+        display: block !important; 
     }
-
     .departments-dropdown-content.active-mobile-dropdown {
         left: 0;
     }
-    
+
     .close-departments-button {
-        display: flex;
+        display: block;
         position: absolute;
-        top: 10px;
-        right: 10px;
-        background-color: #ff8c00;
-        color: #fff;
+        top: 15px;
+        right: 15px;
+        background: none;
         border: none;
-        border-radius: 5px;
-        font-size: 0.9em;
-        font-weight: 600;
-        padding: 8px 12px;
-        cursor: pointer;
-        z-index: 1001;
-        align-items: center;
-        gap: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        transition: background-color 0.2s ease;
-    }
-    .close-departments-button i {
-        font-size: 1.1em;
         color: #fff;
+        font-size: 24px;
+        cursor: pointer;
     }
-    .close-departments-button:hover {
-        background-color: #e67e00;
-    }
-
-    .departments-dropdown-content > div.has-submenu > a {
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
-
-    .has-submenu {
-        width: 100%;
-        text-align: left;
-    }
-
-    .has-submenu > a {
-        justify-content: flex-start;
-        padding-left: 20px; 
-    }
-
+    
     .submenu {
+        display: block; 
         position: static;
-        width: 100%;
         box-shadow: none;
-        background-color: #555;
-        padding-left: 0;
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        transition: max-height 0.3s ease-out;
+        padding: 0;
     }
-
-    .submenu li a {
-        padding-left: 10px;
-        font-size: 1em;
-    }
-
     .submenu.open {
         max-height: 500px;
-        overflow: visible;
-        padding-top: 5px;
-        padding-bottom: 5px;
+        padding: 10px 0;
+    }
+    .submenu li a {
+        padding-left: 30px;
     }
 
-    /* Estilos para a Sidebar de Filtros em Mobile (Off-canvas) */
-    .filter-group h3 {
-        margin-bottom: 0;
-        padding-top: 10px;
-        padding-bottom: 10px;
+    .product-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
     }
-
-    .filter-content {
-        display: none;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    .product-card h3 {
+        font-size: 0.9em;
+        min-height: 36px;
     }
-
-    .filter-content.show {
-        max-height: 500px;
-        overflow: visible;
-        padding-top: 10px;
-        padding-bottom: 5px;
+    .product-card .price {
+        font-size: 1.2em;
+    }
+    .product-buttons {
+        flex-direction: column;
+        padding: 10px;
     }
 
     .open-filters-button {
         display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
         width: 100%;
-        max-width: none;
-        margin: 15px auto 15px auto;
+        padding: 12px;
+        background-color: #ff8c00;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1em;
+        margin-bottom: 20px;
     }
 
     .sidebar-filters {
         position: fixed;
         top: 0;
-        right: -100%;
+        right: -100%; 
         width: 80%;
         max-width: 320px;
-        height: 100%;
-        padding: 20px 20px 80px 20px;
-        box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3);
+        height: 100vh;
         z-index: 1050;
-        transition: right 0.3s ease-out;
-        overflow-y: hidden;
-        border-radius: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
+        transition: right 0.3s ease;
+        overflow-y: auto;
+        top: 0 !important;
     }
-
     .sidebar-filters.active {
         right: 0;
     }
-
     .close-filters-button {
         display: block;
-    }
-
-    .sidebar-filters h2 {
-        margin-top: 30px;
-        text-align: center;
-        border-bottom: none;
-        padding-bottom: 0;
-        flex-shrink: 0;
-    }
-
-    .sidebar-filters .apply-filters {
         position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        border-radius: 0;
-        padding: 15px 20px;
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-        z-index: 1060;
-        flex-shrink: 0;
+        top: 15px;
+        right: 15px;
+        font-size: 24px;
     }
-
-    .sidebar-filters-content-scroll {
-        flex-grow: 1;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 20px;
+    .filter-content {
+        display: none; 
+        padding-top: 10px;
     }
-    
-    .main-content-area {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0;
-        margin-top: 15px;
-    }
-
-    /* --- NOVOS ESTILOS PARA AJUSTAR BOTÕES DE PRODUTO EM MOBILE --- */
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr); /* Mantém 2 colunas em mobile para produtos */
-        gap: 10px; /* Reduzimos o espaçamento entre os cards para caberem melhor */
-    }
-
-    .product-card {
-        position: relative; /* Adiciona position: relative */
-        padding-bottom: 0; 
-    }
-
-    .product-card img {
-        width: 100%;
-        height: 150px; /* Define uma altura fixa para a imagem */
-        object-fit: cover; /* Garante que a imagem preencha a área sem se deformar */
+    .filter-content.show {
         display: block;
-        border-bottom: 1px solid #eee;
     }
+}
 
-    .product-card h3 {
-        font-size: 0.9em; /* Reduzimos um pouco mais o tamanho do título do produto */
-        margin: 5px 0 0 0; /* Ajustamos margens para menos espaço vertical */
-    }
-
-    .product-card p {
-        font-size: 0.75em; /* Reduzimos ainda mais o tamanho da fonte da descrição */
-        margin: 0 5px 5px 5px; /* Margens menores para o parágrafo */
-        -webkit-line-clamp: 2; /* Mantemos 2 linhas para a descrição */
-        min-height: auto; 
-        max-height: none; 
-        line-height: 1.1em; /* Ajustamos a altura da linha */
-    }
-    
-    .product-card .price {
-        font-size: 0.9em; /* Reduzimos o tamanho da fonte do preço */
-        margin-bottom: 5px; /* Ajustamos a margem inferior */
-        margin-top: auto;
-    }
-
-    .product-buttons {
-        flex-direction: column; 
-        gap: 4px; /* Reduzimos um pouco mais o espaçamento entre os botões */
-        padding: 5px; /* Reduzimos o padding interno */
-    }
-
-    .product-buttons button {
-        width: 100%; 
-        padding: 6px; /* Ajustamos o padding dos botões */
-        font-size: 0.7em; /* Diminui significativamente o tamanho da fonte dos botões */
+@media (max-width: 520px) {
+    .info-item {
+        flex-basis: 100%;
     }
 }

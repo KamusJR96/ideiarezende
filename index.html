@@ -6,7 +6,7 @@
     <title>Rezende Materiais para Construção</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
 
@@ -23,8 +23,8 @@
                     <button><i class="fa-solid fa-search"></i></button>
                 </div>
                 <div class="user-actions desktop-actions">
-                    <a href="#" class="action-item"><i class="fa-solid fa-user"></i> Entrar / Cadastrar</a>
-                    <a href="#" class="action-item"><i class="fa-solid fa-shopping-cart"></i> Carrinho</a>
+                    <a href="#" class="action-item"><i class="fa-solid fa-user"></i> <span>Entrar / Cadastrar</span></a>
+                    <a href="#" class="action-item"><i class="fa-solid fa-shopping-cart"></i> <span>Carrinho</span></a>
                 </div>
             </div>
         </div>
@@ -33,12 +33,13 @@
                 <div class="departments-menu">
                     <button class="departments-button"><i class="fa-solid fa-bars"></i> <span class="departments-text">Departamentos</span></button>
                     <div class="departments-dropdown-content" id="departmentsDropdown">
-                        <button class="close-departments-button" id="closeDepartmentsBtn"><i class="fa-solid fa-times"></i> Fechar</button>
+                        <button class="close-departments-button" id="closeDepartmentsBtn"><i class="fa-solid fa-times"></i></button>
                         <div class="has-submenu">
                             <a href="#">Descontos <i class="fa-solid fa-caret-right submenu-arrow"></i></a>
                             <ul class="submenu">
                                 <li><a href="#">Ofertas do Dia</a></li>
-                                <li><a href="#">Promoções</a></li>
+                                <li><a href="#">Liquidação</a></li>
+                                <li><a href="#">Cupons</a></li>
                             </ul>
                         </div>
                         <div class="has-submenu">
@@ -48,24 +49,18 @@
                                 <li><a href="#">Tomadas e Interruptores</a></li>
                                 <li><a href="#">Iluminação</a></li>
                                 <li><a href="#">Disjuntores e Quadros</a></li>
+                                <li><a href="#">Ferramentas Elétricas</a></li>
                             </ul>
                         </div>
                         <div class="has-submenu">
                             <a href="#">Argamassa<i class="fa-solid fa-caret-right submenu-arrow"></i></a>
                             <ul class="submenu">
                                 <li><a href="#">Areia</a></li>
-                                <li><a href="#">Argamassa</a></li>
+                                <li><a href="#">Argamassa AC-I</a></li>
+                                <li><a href="#">Argamassa AC-II</a></li>
+                                <li><a href="#">Argamassa AC-III</a></li>
                                 <li><a href="#">Rejuntes</a></li>
                                 <li><a href="#">Impermeabilizantes</a></li>
-                            </ul>
-                        </div>
-                        <div class="has-submenu">
-                            <a href="#">Tintas<i class="fa-solid fa-caret-right submenu-arrow"></i></a>
-                            <ul class="submenu">
-                                <li><a href="#">Suvinil Select</a></li>
-                                <li><a href="#">Tintas Parede</a></li>
-                                <li><a href="#">Madeiras e Metais</a></li>
-                                <li><a href="#">Acessorios</a></li>
                             </ul>
                         </div>
                         <div class="has-submenu">
@@ -79,10 +74,10 @@
                         <div class="has-submenu">
                             <a href="#">Hidráulica<i class="fa-solid fa-caret-right submenu-arrow"></i></a>
                             <ul class="submenu">
-                                <li><a href="#">Tubos e Conexões</a></li>
+                                <li><a href="#">Tubos e Conexões PVC</a></li>
+                                <li><a href="#">Tubos e Conexões Cobre</a></li>
                                 <li><a href="#">Registros e Válvulas</a></li>
                                 <li><a href="#">Bombas D'água</a></li>
-                                <li><a href="#">Linha Tigre Pro</a></li>
                             </ul>
                         </div>
                          <div class="has-submenu">
@@ -93,12 +88,22 @@
                                 <li><a href="#">Silicones e Selantes</a></li>
                                 <li><a href="#">Fitas Adesivas</a></li>
                             </ul>
-                         <div class="has-submenu">
-                            <a href="#">Banho e Aquecedores<i class="fa-solid fa-caret-right submenu-arrow"></i></a>
+                        </div>
+                        <div class="has-submenu">
+                            <a href="#">Aquecedores<i class="fa-solid fa-caret-right submenu-arrow"></i></a>
                             <ul class="submenu">
-                                <li><a href="#">Chuveiros</a></li>
                                 <li><a href="#">Aquecedores a Gás</a></li>
                                 <li><a href="#">Aquecedores Elétricos</a></li>
+                            </ul>
+                        </div>
+                        <div class="has-submenu">
+                            <a href="suvinil-produtos.html">Tintas<i class="fa-solid fa-caret-right submenu-arrow"></i></a>
+                            <ul class="submenu">
+                                <li><a href="suvinil-produtos.html#acrilica">Tintas Select</a></li>
+                                <li><a href="suvinil-produtos.html#latex">Suvinil</a></li>
+                                <li><a href="suvinil-produtos.html#cores">Madeiras e Metais</a></li>
+                                <li><a href="suvinil-produtos.html#preparacao">Linha Premium</a></li>
+                                <li><a href="suvinil-produtos.html#preparacao">Acessorios</a></li>
                             </ul>
                         </div>
                     </div>
@@ -113,42 +118,61 @@
                     <li><i class="fa-solid fa-percent"></i><span>Descontos</span></li>
                     <li><i class="fa-solid fa-bolt"></i><span>Elétrica</span></li>
                     <li><i class="fa-solid fa-trowel-bricks"></i><span>Argamassa</span></li>
-                    <li><i class="fa-solid fa-paint-roller"></i><span>Tintas</span></li>
+                    <li><a href="suvinil-produtos.html"><i class="fa-solid fa-paint-roller"></i><span>Tintas</span></a></li>
                     <li><i class="fa-solid fa-faucet"></i><span>Hidráulica</span></li>
                     <li><i class="fa-solid fa-tape"></i><span>Adesivos</span></li>
                     <li><i class="fa-solid fa-fire-burner"></i><span>Aquecedores</span></li>
-                    <li><i class="fa-solid fa-paw"></i><span>Tigre</span></li>
-                    <li class="suvinil-link"><a href="suvinil-produtos.html"><i class="fa-solid fa-tint"></i><span>Suvinil</span></a></li>
                 </ul>
             </div>
         </nav>
     </header>
 
-    <main>
-        <section class="hero-banner wrapper">
-            <img src="https://www.krona.com.br/wp-content/uploads/2021/07/180903_ImagensSetembro_2-1.png.webp" alt="Banner Principal Krona">
+    <main class="wrapper">
+        <section class="hero-banner">
+            <img src="banner principal.png" alt="Banner Principal Krona">
         </section>
 
-        <section class="product-categories wrapper">
+        <section class="info-bar">
+            <div class="wrapper">
+                <div class="info-item">
+                    <i class="fa-solid fa-truck-fast"></i>
+                    <span>Entregamos para todo o Brasil</span>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-credit-card"></i>
+                    <span>Parcelamos em até 10x sem juros</span>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-tags"></i>
+                    <span>Descontos especiais no boleto ou pix</span>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-medal"></i>
+                    <span>Mais de 80 anos de tradição</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="product-categories">
             <div class="category-card common-card-styles">
-                <img src="https://images.tcdn.com.br/img/img_prod/1134831/misturador_monocomando_lift_docol_51_1_f119439d9f8458249c3a4bc774bba811.png" alt="Categoria Torneiras">
+                <img src="Acabamentos.jpg" alt="Categoria Torneiras">
                 <div class="card-info">
-                    <h3>ACABAMENTOS</h3>
-                    <p>Conheça Nossa Linha Premium</p>
+                    <h3>TORNEIRAS</h3>
+                    <p>Linha Premium</p>
                 </div>
             </div>
             <a href="suvinil-produtos.html" class="category-card common-card-styles">
-                <img src="https://imgproxy.domestika.org/unsafe/w:1200/rs:fill/plain/src://blog-post-open-graph-covers/000/003/917/3917-original.png?1592159567" alt="Categoria Tintas">
+                <img src="Suvinil Rezende.png" alt="Categoria Tintas">
                 <div class="card-info">
                     <h3>Suvinil</h3>
-                    <p>Parceria Que Realiza Sonhos</p>
+                    <p>Cores e Acabamentos</p>
                 </div>
             </a>
             <div class="category-card common-card-styles">
-                <img src="https://dcdn-us.mitiendanube.com/stores/003/317/653/products/tubo-de-agua-tigre61-31fdd20ebfd359223016887535321368-1024-1024.png" alt="Categoria Tigre">
+                <img src="Experiencias magicas.png" alt="Categoria Tigre">
                 <div class="card-info">
                     <h3>Experiencias Magicas</h3>
-                    <p>Venha Viver Essa Experiencia Conosco</p>
+                    <p>Venha conhecer o nosso projeto</p>
                 </div>
             </div>
             <div class="category-card common-card-styles">
@@ -163,199 +187,6 @@
 
     <div class="filters-overlay" id="filtersOverlay"></div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Lógica para a sidebar de filtros (presente apenas em suvinil-produtos.html, mas o script pode ser geral)
-            const filterTitles = document.querySelectorAll('.filter-group h3');
-            const openFiltersBtn = document.getElementById('openFiltersBtn');
-            const closeFiltersBtn = document.getElementById('closeFiltersBtn');
-            const sidebarFilters = document.getElementById('sidebarFilters');
-            const filtersOverlay = document.getElementById('filtersOverlay');
-
-            function initializeFilterState() {
-                filterTitles.forEach(title => {
-                    const content = title.nextElementSibling;
-                    if (window.innerWidth <= 768) {
-                        title.classList.add('collapsed');
-                        if (content && content.classList.contains('filter-content')) {
-                            content.classList.remove('show');
-                        }
-                    } else {
-                        title.classList.remove('collapsed', 'expanded');
-                        if (content && content.classList.contains('filter-content')) {
-                            content.classList.add('show');
-                        }
-                    }
-                });
-
-                if (window.innerWidth <= 768) {
-                    if (openFiltersBtn) openFiltersBtn.style.display = 'flex';
-                    if (sidebarFilters) sidebarFilters.classList.remove('active');
-                    if (filtersOverlay) filtersOverlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                } else {
-                    if (openFiltersBtn) openFiltersBtn.style.display = 'none';
-                    if (sidebarFilters) sidebarFilters.classList.remove('active');
-                    if (filtersOverlay) filtersOverlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            }
-
-            filterTitles.forEach(title => {
-                title.addEventListener('click', function() {
-                    const content = this.nextElementSibling;
-                    if (content && content.classList.contains('filter-content')) {
-                        content.classList.toggle('show');
-                        this.classList.toggle('collapsed');
-                        this.classList.toggle('expanded');
-                    }
-                });
-            });
-
-            if (openFiltersBtn) {
-                openFiltersBtn.addEventListener('click', function() {
-                    if (sidebarFilters) sidebarFilters.classList.add('active');
-                    if (filtersOverlay) filtersOverlay.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                });
-            }
-
-            if (closeFiltersBtn) {
-                closeFiltersBtn.addEventListener('click', function() {
-                    if (sidebarFilters) sidebarFilters.classList.remove('active');
-                    if (filtersOverlay) filtersOverlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                });
-            }
-
-            if (filtersOverlay) {
-                filtersOverlay.addEventListener('click', function() {
-                    if (sidebarFilters) sidebarFilters.classList.remove('active');
-                    if (filtersOverlay) filtersOverlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                });
-            }
-
-            // CÓDIGO PARA O MENU DE DEPARTAMENTOS
-            const departmentsDropdown = document.getElementById('departmentsDropdown');
-            const departmentsButton = document.querySelector('.departments-button'); // Botão que abre o menu
-            const closeDepartmentsBtn = document.getElementById('closeDepartmentsBtn'); // Botão de fechar
-
-            // Função para fechar o dropdown de departamentos
-            function closeDepartmentsDropdown() {
-                if (departmentsDropdown) {
-                    departmentsDropdown.classList.remove('active-mobile-dropdown');
-                    document.body.style.overflow = ''; // Restaura rolagem do body
-                    if (departmentsButton) departmentsButton.focus(); // Opcional: foca no botão para acessibilidade
-                }
-            }
-
-            // Adiciona evento de clique ao botão de fechar
-            if (closeDepartmentsBtn) {
-                closeDepartmentsBtn.addEventListener('click', function() {
-                    closeDepartmentsDropdown();
-                });
-            }
-
-            // Adiciona evento de clique ao botão "Departamentos" para alternar visibilidade em mobile
-            if (departmentsButton) {
-                departmentsButton.addEventListener('click', function() {
-                    // Controla o menu de departamentos em mobile
-                    if (window.innerWidth <= 768) { 
-                        if (departmentsDropdown) {
-                            departmentsDropdown.classList.toggle('active-mobile-dropdown');
-                            if (departmentsDropdown.classList.contains('active-mobile-dropdown')) {
-                                document.body.style.overflow = 'hidden'; // Impede rolagem do body
-                            } else {
-                                document.body.style.overflow = ''; // Restaura rolagem
-                            }
-                        }
-                    }
-                    // Em desktop, o comportamento de hover CSS já cuida da abertura/fechamento
-                });
-            }
-
-            // Lógica para fechar o dropdown ao clicar fora dele em mobile
-            document.addEventListener('click', function(event) {
-                if (window.innerWidth <= 768) { // Apenas em mobile
-                    const isClickInsideDropdown = departmentsDropdown && departmentsDropdown.contains(event.target);
-                    const isClickOnDepartmentsButton = departmentsButton && departmentsButton.contains(event.target);
-
-                    // Fecha o dropdown se estiver aberto e o clique não foi dentro dele nem no botão que o abre
-                    if (departmentsDropdown && departmentsDropdown.classList.contains('active-mobile-dropdown') && !isClickInsideDropdown && !isClickOnDepartmentsButton) {
-                        closeDepartmentsDropdown();
-                    }
-                }
-            });
-
-            // Adapta o comportamento do dropdown ao redimensionar (de desktop para mobile e vice-versa)
-            function handleDepartmentsDropdownResize() {
-                if (departmentsDropdown) {
-                    if (window.innerWidth <= 768) {
-                        // Garante que o dropdown de departamentos esteja oculto e controle via JS
-                        departmentsDropdown.classList.remove('active-mobile-dropdown');
-                        departmentsDropdown.style.display = ''; // Limpa o display style para que o CSS de off-canvas atue
-                        document.body.style.overflow = ''; // Garante rolagem do body
-                    } else {
-                        // Em desktop, garante que o display seja controlado por CSS (hover) e a classe mobile seja removida
-                        departmentsDropdown.classList.remove('active-mobile-dropdown');
-                        departmentsDropdown.style.display = ''; // Permite que o CSS externo (hover) atue
-                        document.body.style.overflow = ''; // Garante rolagem do body
-                    }
-                }
-            }
-
-            window.addEventListener('resize', handleDepartmentsDropdownResize);
-            handleDepartmentsDropdownResize(); // Inicializa ao carregar
-
-            // CÓDIGO PARA OS SUBMENUS ANINHADOS NO MENU DE DEPARTAMENTOS EM MOBILE
-            const departmentSubmenuParents = document.querySelectorAll('.departments-dropdown-content .has-submenu');
-
-            departmentSubmenuParents.forEach(parentItem => {
-                const link = parentItem.querySelector('a');
-                const submenu = parentItem.querySelector('.submenu');
-                const arrow = parentItem.querySelector('.submenu-arrow');
-
-                link.addEventListener('click', function(event) {
-                    if (window.innerWidth <= 768) { // Apenas em mobile
-                        event.preventDefault(); // Impede a navegação imediata em mobile
-                        if (submenu) {
-                            submenu.classList.toggle('open');
-                            if (arrow) {
-                                arrow.classList.toggle('rotate');
-                            }
-                        }
-                    }
-                    // Em desktop, o link deve navegar normalmente e o hover CSS cuida do submenu
-                });
-
-                // Função para inicializar o estado dos submenus aninhados
-                function initializeSubmenuState() {
-                    if (window.innerWidth <= 768) { // Mobile
-                        if (submenu) submenu.classList.remove('open'); // Garante que estejam fechados
-                        if (arrow) arrow.classList.remove('rotate'); // Garante que a seta não esteja girada
-                    } else { // Desktop
-                        // Em desktop, o comportamento é por CSS (hover). Apenas removemos as classes de controle mobile.
-                        if (submenu) submenu.classList.remove('open');
-                        if (arrow) arrow.classList.remove('rotate');
-                    }
-                }
-
-                initializeSubmenuState(); // Inicializa o estado do submenu ao carregar
-                window.addEventListener('resize', initializeSubmenuState); // Adiciona listener para redimensionamento
-            });
-
-            // A chamada de initializeFilterState() e seu listener de redimensionamento
-            // já foram movidos para o escopo global ou ajustados acima se necessário.
-            // Se existirem múltiplos initializeFilterState, certifique-se de que a que
-            // controla os filtros esteja onde os elementos de filtro existem.
-            // Para index.html, o foco é no departments menu.
-            // No suvinil-produtos.html, a função initializeFilterState completa para filtros deve permanecer.
-
-            // Chame initializeFilterState() e adicione o listener de resize apenas UMA VEZ.
-            // O código acima já faz isso se este for o script único na página.
-        });
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
